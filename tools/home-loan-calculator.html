@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Free Home Loan EMI Calculator - Calculate your monthly EMI and total interest. Plan your home purchase with L R B & Company."
+    />
+    <title>Home Loan EMI Calculator | L R B & Company</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%2365AC4C' rx='15' width='100' height='100'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='50' font-weight='bold' fill='%23FFFFFF'>LRB</text></svg>"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <style>
+      .calculator {
+        background: var(--primary-light);
+        border-radius: var(--radius-2xl);
+        padding: var(--space-2xl);
+        border: 1px solid var(--border);
+      }
+      .calculator__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-2xl);
+      }
+      @media (max-width: 900px) {
+        .calculator__grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .input-group {
+        margin-bottom: var(--space-xl);
+      }
+      .input-group__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--space-md);
+      }
+      .input-group__label {
+        font-size: var(--text-sm);
+        font-weight: var(--weight-medium);
+        color: var(--text);
+      }
+      .input-group__value {
+        font-size: var(--text-base);
+        font-weight: var(--weight-semibold);
+        color: var(--accent);
+        background: var(--surface);
+        padding: var(--space-sm) var(--space-md);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border);
+        width: 140px;
+        text-align: right;
+      }
+      .input-group__range {
+        width: 100%;
+        height: 8px;
+        -webkit-appearance: none;
+        background: var(--surface);
+        border-radius: var(--radius-full);
+        outline: none;
+      }
+      .input-group__range::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        background: var(--accent);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: transform var(--transition-fast);
+      }
+      .input-group__range::-webkit-slider-thumb:hover {
+        transform: scale(1.1);
+      }
+      .results {
+        background: var(--primary-dark);
+        border-radius: var(--radius-xl);
+        padding: var(--space-xl);
+      }
+      .results__title {
+        font-size: var(--text-lg);
+        margin-bottom: var(--space-lg);
+        color: var(--text);
+      }
+      .results__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--space-md) 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .results__item:last-child {
+        border-bottom: none;
+      }
+      .results__label {
+        font-size: var(--text-sm);
+        color: var(--text-muted);
+      }
+      .results__value {
+        font-size: var(--text-lg);
+        font-weight: var(--weight-bold);
+        color: var(--text);
+      }
+      .results__value--highlight {
+        color: var(--accent);
+        font-size: var(--text-2xl);
+      }
+      .emi-highlight {
+        text-align: center;
+        padding: var(--space-xl);
+        background: var(--accent-light);
+        border-radius: var(--radius-lg);
+        margin-bottom: var(--space-lg);
+      }
+      .emi-highlight__label {
+        font-size: var(--text-sm);
+        color: var(--accent);
+        margin-bottom: var(--space-sm);
+      }
+      .emi-highlight__value {
+        font-size: var(--text-3xl);
+        font-weight: var(--weight-bold);
+        color: var(--accent);
+      }
+      .chart {
+        margin-top: var(--space-xl);
+      }
+      .chart__bar {
+        display: flex;
+        height: 24px;
+        border-radius: var(--radius-full);
+        overflow: hidden;
+        background: var(--surface);
+      }
+      .chart__segment {
+        height: 100%;
+        transition: width var(--transition-base);
+      }
+      .chart__segment--principal {
+        background: var(--info);
+      }
+      .chart__segment--interest {
+        background: var(--warning);
+      }
+      .chart__legend {
+        display: flex;
+        gap: var(--space-lg);
+        margin-top: var(--space-md);
+      }
+      .chart__legend-item {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+        font-size: var(--text-sm);
+        color: var(--text-muted);
+      }
+      .chart__legend-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar__inner">
+          <a href="../index.html" class="navbar__logo">
+            <div class="navbar__logo-icon">LRB</div>
+            <div class="navbar__logo-text">L R B <span>&</span> Company</div>
+          </a>
+          <ul class="navbar__menu">
+            <li><a href="../index.html" class="navbar__link">Home</a></li>
+            <li><a href="../about.html" class="navbar__link">About Us</a></li>
+            <li>
+              <a href="../index.html#services" class="navbar__link">Services</a>
+            </li>
+            <li>
+              <a href="../index.html#tools" class="navbar__link active"
+                >Tools</a
+              >
+            </li>
+            <li>
+              <a href="../resources.html" class="navbar__link">Resources</a>
+            </li>
+            <li><a href="../contact.html" class="navbar__link">Contact</a></li>
+            <li class="navbar__cta">
+              <a href="../contact.html" class="btn btn--primary"
+                >Get Appointed</a
+              >
+            </li>
+          </ul>
+          <button class="navbar__toggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+      <div class="container">
+        <h1 class="page-header__title">Home Loan EMI Calculator</h1>
+        <nav class="page-header__breadcrumb" aria-label="Breadcrumb">
+          <a href="../index.html">Home</a>
+          <span>→</span>
+          <a href="../index.html#tools">Tools</a>
+          <span>→</span>
+          <span>Home Loan Calculator</span>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Calculator Section -->
+    <main class="section">
+      <div class="container container--narrow">
+        <div class="section-header" style="margin-bottom: var(--space-2xl)">
+          <p class="section-header__text">
+            Calculate your monthly EMI, total interest, and payment schedule for
+            your home loan. Plan your dream home purchase with our free
+            calculator.
+          </p>
+        </div>
+
+        <div class="calculator" id="home-loan-calculator">
+          <div class="calculator__grid">
+            <!-- Inputs -->
+            <div>
+              <div class="input-group">
+                <div class="input-group__header">
+                  <label class="input-group__label">Loan Amount (₹)</label>
+                  <input
+                    type="number"
+                    name="loanAmount"
+                    class="input-group__value"
+                    value="5000000"
+                    min="100000"
+                    max="100000000"
+                    step="100000"
+                  />
+                </div>
+                <input
+                  type="range"
+                  name="loanAmount"
+                  class="input-group__range"
+                  value="5000000"
+                  min="100000"
+                  max="50000000"
+                  step="100000"
+                />
+              </div>
+
+              <div class="input-group">
+                <div class="input-group__header">
+                  <label class="input-group__label"
+                    >Interest Rate (% p.a.)</label
+                  >
+                  <input
+                    type="number"
+                    name="interestRate"
+                    class="input-group__value"
+                    value="8.5"
+                    min="5"
+                    max="20"
+                    step="0.1"
+                  />
+                </div>
+                <input
+                  type="range"
+                  name="interestRate"
+                  class="input-group__range"
+                  value="8.5"
+                  min="5"
+                  max="20"
+                  step="0.1"
+                />
+              </div>
+
+              <div class="input-group">
+                <div class="input-group__header">
+                  <label class="input-group__label">Loan Tenure (Years)</label>
+                  <input
+                    type="number"
+                    name="loanTenure"
+                    class="input-group__value"
+                    value="20"
+                    min="1"
+                    max="30"
+                    step="1"
+                  />
+                </div>
+                <input
+                  type="range"
+                  name="loanTenure"
+                  class="input-group__range"
+                  value="20"
+                  min="1"
+                  max="30"
+                  step="1"
+                />
+              </div>
+            </div>
+
+            <!-- Results -->
+            <div class="results">
+              <div class="emi-highlight">
+                <div class="emi-highlight__label">Your Monthly EMI</div>
+                <div class="emi-highlight__value" data-result="emi">
+                  ₹43,391
+                </div>
+              </div>
+
+              <div class="results__item">
+                <span class="results__label">Principal Amount</span>
+                <span class="results__value" data-result="principal"
+                  >₹50,00,000</span
+                >
+              </div>
+
+              <div class="results__item">
+                <span class="results__label">Total Interest</span>
+                <span class="results__value" data-result="interest"
+                  >₹54,13,880</span
+                >
+              </div>
+
+              <div class="results__item">
+                <span class="results__label">Total Amount Payable</span>
+                <span
+                  class="results__value results__value--highlight"
+                  data-result="total"
+                  >₹1,04,13,880</span
+                >
+              </div>
+
+              <div class="chart">
+                <div class="chart__bar">
+                  <div
+                    class="chart__segment chart__segment--principal"
+                    data-chart="principal"
+                    style="width: 48%"
+                  ></div>
+                  <div
+                    class="chart__segment chart__segment--interest"
+                    data-chart="interest"
+                    style="width: 52%"
+                  ></div>
+                </div>
+                <div class="chart__legend">
+                  <div class="chart__legend-item">
+                    <span
+                      class="chart__legend-dot"
+                      style="background: var(--info)"
+                    ></span>
+                    Principal
+                  </div>
+                  <div class="chart__legend-item">
+                    <span
+                      class="chart__legend-dot"
+                      style="background: var(--warning)"
+                    ></span>
+                    Interest
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tips Section -->
+        <div class="grid grid-2 mt-2xl" style="gap: var(--space-xl)">
+          <div class="card">
+            <h4 class="card__title">Tips to Reduce EMI</h4>
+            <p class="card__text">
+              • Make a larger down payment<br />
+              • Opt for longer tenure (lower EMI, more interest)<br />
+              • Compare interest rates across banks<br />
+              • Maintain a good credit score
+            </p>
+          </div>
+          <div class="card">
+            <h4 class="card__title">Prepayment Benefits</h4>
+            <p class="card__text">
+              Making prepayments towards your principal can significantly reduce
+              the total interest paid. Even small additional payments can make a
+              big difference over the loan tenure.
+            </p>
+          </div>
+        </div>
+
+        <!-- Other Tools -->
+        <div class="mt-2xl text-center">
+          <h4 style="color: var(--text-muted); margin-bottom: var(--space-lg)">
+            Other Calculators
+          </h4>
+          <div
+            style="
+              display: flex;
+              gap: var(--space-md);
+              justify-content: center;
+              flex-wrap: wrap;
+            "
+          >
+            <a href="sip-calculator.html" class="btn btn--secondary"
+              >SIP Calculator</a
+            >
+            <a href="income-tax-calculator.html" class="btn btn--secondary"
+              >Income Tax Calculator</a
+            >
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__bottom" style="border-top: none; padding-top: 0">
+          <p class="footer__copyright">
+            © 2026 L R B & Company. All rights reserved.
+          </p>
+          <div class="footer__legal">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/calculators.js"></script>
+  </body>
+</html>

@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Free Income Tax Calculator FY 2025-26 - Compare Old vs New Tax Regime. Calculate your tax liability with L R B & Company."
+    />
+    <title>Income Tax Calculator FY 2025-26 | L R B & Company</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%2365AC4C' rx='15' width='100' height='100'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='50' font-weight='bold' fill='%23FFFFFF'>LRB</text></svg>"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <style>
+      .calculator {
+        background: var(--primary-light);
+        border-radius: var(--radius-2xl);
+        padding: var(--space-2xl);
+        border: 1px solid var(--border);
+      }
+      .calculator__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-2xl);
+      }
+      @media (max-width: 900px) {
+        .calculator__grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .input-group {
+        margin-bottom: var(--space-lg);
+      }
+      .input-group__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--space-sm);
+      }
+      .input-group__label {
+        font-size: var(--text-sm);
+        font-weight: var(--weight-medium);
+        color: var(--text);
+      }
+      .input-group__value {
+        font-size: var(--text-base);
+        font-weight: var(--weight-semibold);
+        color: var(--accent);
+        background: var(--surface);
+        padding: var(--space-sm) var(--space-md);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border);
+        width: 140px;
+        text-align: right;
+      }
+      .input-group__range {
+        width: 100%;
+        height: 8px;
+        -webkit-appearance: none;
+        background: var(--surface);
+        border-radius: var(--radius-full);
+        outline: none;
+      }
+      .input-group__range::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        background: var(--accent);
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      .regime-toggle {
+        display: flex;
+        gap: var(--space-md);
+        margin-bottom: var(--space-xl);
+      }
+      .regime-option {
+        flex: 1;
+        padding: var(--space-md);
+        background: var(--surface);
+        border: 2px solid var(--border);
+        border-radius: var(--radius-lg);
+        cursor: pointer;
+        text-align: center;
+        transition: all var(--transition-fast);
+      }
+      .regime-option:has(input:checked) {
+        border-color: var(--accent);
+        background: var(--accent-light);
+      }
+      .regime-option input {
+        display: none;
+      }
+      .regime-option__label {
+        font-weight: var(--weight-semibold);
+        color: var(--text);
+        display: block;
+      }
+      .regime-option__desc {
+        font-size: var(--text-xs);
+        color: var(--text-muted);
+        margin-top: var(--space-xs);
+      }
+      .deduction-fields {
+        padding: var(--space-lg);
+        background: var(--surface);
+        border-radius: var(--radius-lg);
+        margin-top: var(--space-lg);
+        transition: opacity var(--transition-fast);
+      }
+      .deduction-fields__title {
+        font-size: var(--text-sm);
+        font-weight: var(--weight-semibold);
+        color: var(--accent);
+        margin-bottom: var(--space-md);
+      }
+      .results {
+        background: var(--primary-dark);
+        border-radius: var(--radius-xl);
+        padding: var(--space-xl);
+      }
+      .results__title {
+        font-size: var(--text-lg);
+        margin-bottom: var(--space-lg);
+        color: var(--text);
+        text-align: center;
+      }
+      .comparison {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-md);
+        margin-bottom: var(--space-xl);
+      }
+      .comparison__box {
+        padding: var(--space-lg);
+        border-radius: var(--radius-lg);
+        text-align: center;
+      }
+      .comparison__box--old {
+        background: rgba(239, 68, 68, 0.15);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+      }
+      .comparison__box--new {
+        background: rgba(16, 185, 129, 0.15);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+      }
+      .comparison__label {
+        font-size: var(--text-xs);
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: var(--tracking-wide);
+      }
+      .comparison__value {
+        font-size: var(--text-2xl);
+        font-weight: var(--weight-bold);
+        color: var(--text);
+        margin-top: var(--space-sm);
+      }
+      .comparison__box--old .comparison__value {
+        color: #ef4444;
+      }
+      .comparison__box--new .comparison__value {
+        color: #10b981;
+      }
+      .recommendation {
+        text-align: center;
+        padding: var(--space-lg);
+        background: var(--success-light);
+        border-radius: var(--radius-lg);
+      }
+      .recommendation__label {
+        font-size: var(--text-sm);
+        color: var(--text-muted);
+        margin-bottom: var(--space-sm);
+      }
+      .recommendation__text {
+        font-size: var(--text-lg);
+        font-weight: var(--weight-bold);
+        color: var(--success);
+      }
+      .savings {
+        text-align: center;
+        margin-top: var(--space-lg);
+      }
+      .savings__label {
+        font-size: var(--text-sm);
+        color: var(--text-muted);
+      }
+      .savings__value {
+        font-size: var(--text-xl);
+        font-weight: var(--weight-bold);
+        color: var(--accent);
+      }
+      .tax-slabs {
+        margin-top: var(--space-2xl);
+      }
+      .tax-slabs__title {
+        font-size: var(--text-lg);
+        margin-bottom: var(--space-lg);
+        text-align: center;
+      }
+      .slabs-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-lg);
+      }
+      @media (max-width: 768px) {
+        .slabs-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .slab-table {
+        background: var(--surface);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+      }
+      .slab-table__header {
+        background: var(--accent);
+        color: var(--primary);
+        padding: var(--space-md);
+        font-weight: var(--weight-semibold);
+        text-align: center;
+      }
+      .slab-row {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--space-sm) var(--space-md);
+        border-bottom: 1px solid var(--border);
+        font-size: var(--text-sm);
+      }
+      .slab-row:last-child {
+        border-bottom: none;
+      }
+      .slab-row__income {
+        color: var(--text-secondary);
+      }
+      .slab-row__rate {
+        font-weight: var(--weight-medium);
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar__inner">
+          <a href="../index.html" class="navbar__logo">
+            <div class="navbar__logo-icon">LRB</div>
+            <div class="navbar__logo-text">L R B <span>&</span> Company</div>
+          </a>
+          <ul class="navbar__menu">
+            <li><a href="../index.html" class="navbar__link">Home</a></li>
+            <li><a href="../about.html" class="navbar__link">About Us</a></li>
+            <li>
+              <a href="../index.html#services" class="navbar__link">Services</a>
+            </li>
+            <li>
+              <a href="../index.html#tools" class="navbar__link active"
+                >Tools</a
+              >
+            </li>
+            <li>
+              <a href="../resources.html" class="navbar__link">Resources</a>
+            </li>
+            <li><a href="../contact.html" class="navbar__link">Contact</a></li>
+            <li class="navbar__cta">
+              <a href="../contact.html" class="btn btn--primary"
+                >Get Appointed</a
+              >
+            </li>
+          </ul>
+          <button class="navbar__toggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+      <div class="container">
+        <h1 class="page-header__title">Income Tax Calculator</h1>
+        <p style="color: var(--accent); margin-top: var(--space-sm)">
+          FY 2025-26 (AY 2026-27)
+        </p>
+        <nav class="page-header__breadcrumb" aria-label="Breadcrumb">
+          <a href="../index.html">Home</a>
+          <span>→</span>
+          <a href="../index.html#tools">Tools</a>
+          <span>→</span>
+          <span>Income Tax Calculator</span>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Calculator Section -->
+    <main class="section">
+      <div class="container container--narrow">
+        <div class="section-header" style="margin-bottom: var(--space-2xl)">
+          <p class="section-header__text">
+            Compare your tax liability under the Old and New tax regimes. Find
+            out which one saves you more money.
+          </p>
+        </div>
+
+        <div class="calculator" id="income-tax-calculator">
+          <div class="calculator__grid">
+            <!-- Inputs -->
+            <div>
+              <div class="input-group">
+                <div class="input-group__header">
+                  <label class="input-group__label"
+                    >Gross Annual Income (₹)</label
+                  >
+                  <input
+                    type="number"
+                    name="grossIncome"
+                    class="input-group__value"
+                    value="1000000"
+                    min="0"
+                    max="100000000"
+                    step="10000"
+                  />
+                </div>
+                <input
+                  type="range"
+                  name="grossIncome"
+                  class="input-group__range"
+                  value="1000000"
+                  min="0"
+                  max="5000000"
+                  step="50000"
+                />
+              </div>
+
+              <div class="deduction-fields">
+                <div class="deduction-fields__title">
+                  Deductions (for Old Regime comparison)
+                </div>
+
+                <div class="input-group">
+                  <div class="input-group__header">
+                    <label class="input-group__label"
+                      >Section 80C (Max ₹1.5L)</label
+                    >
+                    <input
+                      type="number"
+                      name="deductions80C"
+                      class="input-group__value"
+                      value="150000"
+                      min="0"
+                      max="150000"
+                      step="1000"
+                    />
+                  </div>
+                  <input
+                    type="range"
+                    name="deductions80C"
+                    class="input-group__range"
+                    value="150000"
+                    min="0"
+                    max="150000"
+                    step="5000"
+                  />
+                </div>
+
+                <div class="input-group">
+                  <div class="input-group__header">
+                    <label class="input-group__label"
+                      >Section 80D (Health Insurance)</label
+                    >
+                    <input
+                      type="number"
+                      name="deductions80D"
+                      class="input-group__value"
+                      value="25000"
+                      min="0"
+                      max="100000"
+                      step="1000"
+                    />
+                  </div>
+                  <input
+                    type="range"
+                    name="deductions80D"
+                    class="input-group__range"
+                    value="25000"
+                    min="0"
+                    max="100000"
+                    step="5000"
+                  />
+                </div>
+
+                <div class="input-group">
+                  <div class="input-group__header">
+                    <label class="input-group__label">HRA Exemption (₹)</label>
+                    <input
+                      type="number"
+                      name="hra"
+                      class="input-group__value"
+                      value="0"
+                      min="0"
+                      max="500000"
+                      step="1000"
+                    />
+                  </div>
+                  <input
+                    type="range"
+                    name="hra"
+                    class="input-group__range"
+                    value="0"
+                    min="0"
+                    max="500000"
+                    step="5000"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Results -->
+            <div class="results">
+              <h3 class="results__title">Tax Comparison</h3>
+
+              <div class="comparison">
+                <div class="comparison__box comparison__box--old">
+                  <div class="comparison__label">Old Regime</div>
+                  <div class="comparison__value" data-result="taxOld">
+                    ₹1,17,000
+                  </div>
+                </div>
+                <div class="comparison__box comparison__box--new">
+                  <div class="comparison__label">New Regime</div>
+                  <div class="comparison__value" data-result="taxNew">
+                    ₹52,000
+                  </div>
+                </div>
+              </div>
+
+              <div class="recommendation">
+                <div class="recommendation__label">Our Recommendation</div>
+                <div class="recommendation__text" data-result="recommendation">
+                  New Tax Regime is better for you!
+                </div>
+              </div>
+
+              <div class="savings">
+                <div class="savings__label">Your Savings</div>
+                <div class="savings__value" data-result="savings">₹65,000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tax Slabs Reference -->
+        <div class="tax-slabs">
+          <h3 class="tax-slabs__title">Tax Slab Rates FY 2025-26</h3>
+          <div class="slabs-grid">
+            <!-- Old Regime -->
+            <div class="slab-table">
+              <div class="slab-table__header">Old Tax Regime</div>
+              <div class="slab-row">
+                <span class="slab-row__income">Up to ₹2.5 Lakh</span>
+                <span class="slab-row__rate">Nil</span>
+              </div>
+              <div class="slab-row">
+                <span class="slab-row__income">₹2.5L - ₹5L</span>
+                <span class="slab-row__rate">5%</span>
+              </div>
+              <div class="slab-row">
+                <span class="slab-row__income">₹5L - ₹10L</span>
+                <span class="slab-row__rate">20%</span>
+              </div>
+              <div class="slab-row">
+                <span class="slab-row__income">Above ₹10L</span>
+                <span class="slab-row__rate">30%</span>
+              </div>
+            </div>
+
+            <!-- New Regime -->
+            <div class="slab-table">
+              <div class="slab-table__header">New Tax Regime (Default)</div>
+              <div class="slab-row">
+                <span class="slab-row__income">Up to ₹3 Lakh</span>
+                <span class="slab-row__rate">Nil</span>
+              </div>
+              <div class="slab-row">
+                <span class="slab-row__income">₹3L - ₹7L</span>
+                <span class="slab-row__rate">5%</span>
+              </div>
+              <div class="slab-row">
+                <span class="slab-row__income">₹7L - ₹10L</span>
+                <span class="slab-row__rate">10%</span>
+              </div>
+              <div class="slab-row">
+                <span class="slab-row__income">₹10L - ₹12L</span>
+                <span class="slab-row__rate">15%</span>
+              </div>
+              <div class="slab-row">
+                <span class="slab-row__income">₹12L - ₹15L</span>
+                <span class="slab-row__rate">20%</span>
+              </div>
+              <div class="slab-row">
+                <span class="slab-row__income">Above ₹15L</span>
+                <span class="slab-row__rate">30%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Need Help -->
+        <div
+          class="card mt-2xl"
+          style="text-align: center; padding: var(--space-2xl)"
+        >
+          <h4 class="card__title">Need Professional Tax Planning?</h4>
+          <p
+            class="card__text"
+            style="max-width: 500px; margin: 0 auto var(--space-lg)"
+          >
+            Our tax experts can help you optimize your tax liability with
+            personalized strategies and ensure full compliance.
+          </p>
+          <a href="../contact.html" class="btn btn--primary"
+            >Consult a Tax Expert</a
+          >
+        </div>
+
+        <!-- Other Tools -->
+        <div class="mt-2xl text-center">
+          <h4 style="color: var(--text-muted); margin-bottom: var(--space-lg)">
+            Other Calculators
+          </h4>
+          <div
+            style="
+              display: flex;
+              gap: var(--space-md);
+              justify-content: center;
+              flex-wrap: wrap;
+            "
+          >
+            <a href="sip-calculator.html" class="btn btn--secondary"
+              >SIP Calculator</a
+            >
+            <a href="home-loan-calculator.html" class="btn btn--secondary"
+              >Home Loan Calculator</a
+            >
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__bottom" style="border-top: none; padding-top: 0">
+          <p class="footer__copyright">
+            © 2026 L R B & Company. All rights reserved.
+          </p>
+          <div class="footer__legal">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/calculators.js"></script>
+  </body>
+</html>
