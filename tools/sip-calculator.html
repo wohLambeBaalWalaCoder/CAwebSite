@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Free SIP Calculator - Calculate your Systematic Investment Plan returns. Plan your investments with L R B & Company."
+    />
+    <title>SIP Calculator | L R B & Company</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%2365AC4C' rx='15' width='100' height='100'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='50' font-weight='bold' fill='%23FFFFFF'>LRB</text></svg>"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <style>
+      .calculator {
+        background: var(--primary);
+        border-radius: var(--radius-2xl);
+        padding: var(--space-3xl);
+        border: 1px solid var(--border-light);
+        box-shadow: var(--shadow-xl);
+        position: relative;
+        overflow: hidden;
+      }
+      .calculator::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: var(--gradient-accent);
+      }
+      .calculator__grid {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: var(--space-4xl);
+        align-items: center;
+      }
+      @media (max-width: 900px) {
+        .calculator__grid {
+          grid-template-columns: 1fr;
+          gap: var(--space-2xl);
+        }
+        .calculator {
+          padding: var(--space-xl);
+        }
+      }
+      .input-group {
+        margin-bottom: var(--space-2xl);
+        position: relative;
+      }
+      .input-group:last-child {
+        margin-bottom: 0;
+      }
+      .input-group__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--space-md);
+      }
+      .input-group__label {
+        font-size: var(--text-base);
+        font-weight: var(--weight-medium);
+        color: var(--text-secondary);
+      }
+      .input-group__value {
+        font-family: var(--font-heading);
+        font-size: var(--text-lg);
+        font-weight: var(--weight-bold);
+        color: var(--accent-dark);
+        background: var(--primary-light);
+        padding: var(--space-sm) var(--space-md);
+        border-radius: var(--radius-md);
+        border: 2px solid transparent;
+        width: 140px;
+        text-align: right;
+        transition: all var(--transition-fast);
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+      }
+      .input-group__value:focus {
+        outline: none;
+        border-color: var(--accent);
+        background: var(--primary);
+        box-shadow: 0 0 0 3px var(--success-light);
+      }
+      .input-group__range {
+        width: 100%;
+        height: 8px;
+        -webkit-appearance: none;
+        background: var(--primary-dark);
+        border-radius: var(--radius-full);
+        outline: none;
+        margin-top: var(--space-sm);
+      }
+      .input-group__range::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 24px;
+        height: 24px;
+        background: var(--primary);
+        border: 3px solid var(--accent);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        box-shadow: var(--shadow-md);
+      }
+      .input-group__range::-webkit-slider-thumb:hover {
+        transform: scale(1.15);
+        box-shadow: var(--shadow-lg);
+        background: var(--accent-light);
+      }
+      .results {
+        background: var(--primary-light);
+        border-radius: var(--radius-xl);
+        padding: var(--space-2xl);
+        border: 1px solid var(--border-light);
+        box-shadow: var(--shadow-md);
+      }
+      .results__title {
+        font-size: var(--text-xl);
+        margin-bottom: var(--space-xl);
+        color: var(--text-dark);
+        font-weight: var(--weight-bold);
+        text-align: center;
+        position: relative;
+        padding-bottom: var(--space-sm);
+      }
+      .results__title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 3px;
+        background: var(--accent);
+        border-radius: var(--radius-full);
+      }
+      .results__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--space-md) 0;
+        border-bottom: 1px dashed var(--border-light);
+      }
+      .results__item:last-of-type,
+      .results__item.results__item--total {
+        border-bottom: none;
+      }
+      .results__label {
+        font-size: var(--text-sm);
+        color: var(--text-secondary);
+        font-weight: var(--weight-medium);
+      }
+      .results__value {
+        font-family: var(--font-heading);
+        font-size: var(--text-lg);
+        font-weight: var(--weight-bold);
+        color: var(--text-dark);
+      }
+      .results__item--total {
+        background: var(--primary);
+        padding: var(--space-lg);
+        border-radius: var(--radius-lg);
+        margin-top: var(--space-md);
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border-light);
+      }
+      .results__item--total .results__label {
+        font-size: var(--text-base);
+        color: var(--text-dark);
+        font-weight: var(--weight-bold);
+      }
+      .results__value--highlight {
+        color: var(--accent);
+        font-size: var(--text-2xl);
+        background: var(--gradient-accent);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .chart {
+        margin-top: var(--space-2xl);
+      }
+      .chart__bar {
+        display: flex;
+        height: 16px;
+        border-radius: var(--radius-full);
+        overflow: hidden;
+        background: var(--border-light);
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+      .chart__segment {
+        height: 100%;
+        transition: width var(--transition-slow);
+      }
+      .chart__segment--invested {
+        background: var(--info);
+      }
+      .chart__segment--returns {
+        background: var(--success);
+      }
+      .chart__legend {
+        display: flex;
+        justify-content: center;
+        gap: var(--space-xl);
+        margin-top: var(--space-md);
+      }
+      .chart__legend-item {
+        display: flex;
+        align-items: center;
+        gap: var(--space-xs);
+        font-size: var(--text-sm);
+        color: var(--text-secondary);
+        font-weight: var(--weight-medium);
+      }
+      .chart__legend-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        box-shadow: var(--shadow-sm);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar__inner">
+          <a href="../index.html" class="navbar__logo">
+            <div class="navbar__logo-icon">LRB</div>
+            <div class="navbar__logo-text">L R B <span>&</span> Company</div>
+          </a>
+          <ul class="navbar__menu">
+            <li><a href="../index.html" class="navbar__link">Home</a></li>
+            <li><a href="../about.html" class="navbar__link">About Us</a></li>
+            <li>
+              <a href="../index.html#services" class="navbar__link">Services</a>
+            </li>
+            <li>
+              <a href="../index.html#tools" class="navbar__link active"
+                >Tools</a
+              >
+            </li>
+            <li>
+              <a href="../resources.html" class="navbar__link">Resources</a>
+            </li>
+            <li><a href="../contact.html" class="navbar__link">Contact</a></li>
+            <li class="navbar__cta">
+              <a href="../contact.html" class="btn btn--primary"
+                >Get Appointed</a
+              >
+            </li>
+          </ul>
+          <button class="navbar__toggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+      <div class="container">
+        <h1 class="page-header__title">SIP Calculator</h1>
+        <nav class="page-header__breadcrumb" aria-label="Breadcrumb">
+          <a href="../index.html">Home</a>
+          <span>→</span>
+          <a href="../index.html#tools">Tools</a>
+          <span>→</span>
+          <span>SIP Calculator</span>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Calculator Section -->
+    <main class="section">
+      <div class="container container--narrow">
+        <div class="section-header" style="margin-bottom: var(--space-2xl)">
+          <p class="section-header__text">
+            Calculate how much your Systematic Investment Plan (SIP) can grow
+            over time. See the power of compounding with our free calculator.
+          </p>
+        </div>
+
+        <div class="calculator" id="sip-calculator">
+          <div class="calculator__grid">
+            <!-- Inputs -->
+            <div>
+              <div class="input-group">
+                <div class="input-group__header">
+                  <label class="input-group__label"
+                    >Monthly Investment (₹)</label
+                  >
+                  <input
+                    type="number"
+                    name="monthlyInvestment"
+                    class="input-group__value"
+                    value="5000"
+                    min="500"
+                    max="1000000"
+                    step="500"
+                  />
+                </div>
+                <input
+                  type="range"
+                  name="monthlyInvestment"
+                  class="input-group__range"
+                  value="5000"
+                  min="500"
+                  max="100000"
+                  step="500"
+                />
+              </div>
+
+              <div class="input-group">
+                <div class="input-group__header">
+                  <label class="input-group__label"
+                    >Expected Return Rate (% p.a.)</label
+                  >
+                  <input
+                    type="number"
+                    name="expectedReturn"
+                    class="input-group__value"
+                    value="12"
+                    min="1"
+                    max="30"
+                    step="0.5"
+                  />
+                </div>
+                <input
+                  type="range"
+                  name="expectedReturn"
+                  class="input-group__range"
+                  value="12"
+                  min="1"
+                  max="30"
+                  step="0.5"
+                />
+              </div>
+
+              <div class="input-group">
+                <div class="input-group__header">
+                  <label class="input-group__label">Time Period (Years)</label>
+                  <input
+                    type="number"
+                    name="timePeriod"
+                    class="input-group__value"
+                    value="10"
+                    min="1"
+                    max="40"
+                    step="1"
+                  />
+                </div>
+                <input
+                  type="range"
+                  name="timePeriod"
+                  class="input-group__range"
+                  value="10"
+                  min="1"
+                  max="40"
+                  step="1"
+                />
+              </div>
+            </div>
+
+            <!-- Results -->
+            <div class="results">
+              <h3 class="results__title">Your SIP Returns</h3>
+
+              <div class="results__item">
+                <span class="results__label">Invested Amount</span>
+                <span class="results__value" data-result="invested"
+                  >₹6,00,000</span
+                >
+              </div>
+
+              <div class="results__item">
+                <span class="results__label">Estimated Returns</span>
+                <span class="results__value" data-result="returns"
+                  >₹5,58,073</span
+                >
+              </div>
+
+              <div class="results__item results__item--total">
+                <span class="results__label">Total Value</span>
+                <span
+                  class="results__value results__value--highlight"
+                  data-result="total"
+                  >₹11,58,073</span
+                >
+              </div>
+
+              <div class="chart">
+                <div class="chart__bar">
+                  <div
+                    class="chart__segment chart__segment--invested"
+                    data-chart="invested"
+                    style="width: 52%"
+                  ></div>
+                  <div
+                    class="chart__segment chart__segment--returns"
+                    data-chart="returns"
+                    style="width: 48%"
+                  ></div>
+                </div>
+                <div class="chart__legend">
+                  <div class="chart__legend-item">
+                    <span
+                      class="chart__legend-dot"
+                      style="background: var(--info)"
+                    ></span>
+                    Invested
+                  </div>
+                  <div class="chart__legend-item">
+                    <span
+                      class="chart__legend-dot"
+                      style="background: var(--success)"
+                    ></span>
+                    Returns
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="grid grid-2 mt-2xl" style="gap: var(--space-xl)">
+          <div class="card">
+            <h4 class="card__title">What is SIP?</h4>
+            <p class="card__text">
+              A Systematic Investment Plan (SIP) is an investment strategy where
+              you invest a fixed amount regularly in mutual funds. It helps
+              build wealth over time through rupee cost averaging and the power
+              of compounding.
+            </p>
+          </div>
+          <div class="card">
+            <h4 class="card__title">Benefits of SIP</h4>
+            <p class="card__text">
+              • Start with as little as ₹500/month<br />
+              • Benefit from rupee cost averaging<br />
+              • Build discipline in investing<br />
+              • Take advantage of compounding
+            </p>
+          </div>
+        </div>
+
+        <!-- Other Tools -->
+        <div class="mt-2xl text-center">
+          <h4 style="color: var(--text-muted); margin-bottom: var(--space-lg)">
+            Other Calculators
+          </h4>
+          <div
+            style="
+              display: flex;
+              gap: var(--space-md);
+              justify-content: center;
+              flex-wrap: wrap;
+            "
+          >
+            <a href="home-loan-calculator.html" class="btn btn--secondary"
+              >Home Loan Calculator</a
+            >
+            <a href="income-tax-calculator.html" class="btn btn--secondary"
+              >Income Tax Calculator</a
+            >
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__bottom" style="border-top: none; padding-top: 0">
+          <p class="footer__copyright">
+            © 2026 L R B & Company. All rights reserved.
+          </p>
+          <div class="footer__legal">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/calculators.js"></script>
+  </body>
+</html>

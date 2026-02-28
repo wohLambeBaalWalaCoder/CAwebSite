@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="About L R B & Company - Meet CA Lalit Badgujar and our team of expert chartered accountants in Pune."
+    />
+    <title>About Us | L R B & Company</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%2365AC4C' rx='15' width='100' height='100'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='50' font-weight='bold' fill='%23FFFFFF'>LRB</text></svg>"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+    <style>
+      .about-hero {
+        background: var(--primary-dark);
+        padding: calc(80px + var(--space-4xl)) 0 var(--space-4xl);
+      }
+      .about-hero__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-3xl);
+        align-items: center;
+      }
+      @media (max-width: 900px) {
+        .about-hero__grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .about-hero__content h1 {
+        font-size: var(--text-4xl);
+        margin-bottom: var(--space-lg);
+      }
+      .about-hero__content p {
+        font-size: var(--text-lg);
+        color: var(--text-muted);
+        line-height: var(--leading-relaxed);
+      }
+      .about-hero__image {
+        background: var(--gradient-glass);
+        border-radius: var(--radius-2xl);
+        padding: var(--space-2xl);
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 300px;
+      }
+      .about-hero__logo {
+        font-size: 120px;
+        font-weight: var(--weight-bold);
+        color: var(--accent);
+        font-family: var(--font-heading);
+        text-shadow: 0 0 60px var(--accent-light);
+      }
+      .values-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-xl);
+      }
+      @media (max-width: 768px) {
+        .values-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .value-card {
+        text-align: center;
+        padding: var(--space-2xl);
+      }
+      .value-card__icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto var(--space-lg);
+        background: var(--accent-light);
+        border-radius: var(--radius-xl);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .value-card__icon svg {
+        width: 40px;
+        height: 40px;
+        color: var(--accent);
+      }
+      .team-section {
+        background: var(--primary-dark);
+      }
+      .team-card {
+        background: var(--primary-light);
+        border-radius: var(--radius-xl);
+        padding: var(--space-xl);
+        text-align: center;
+        border: 1px solid var(--border);
+      }
+      .team-card__avatar {
+        width: 120px;
+        height: 120px;
+        background: var(--gradient-accent);
+        border-radius: var(--radius-full);
+        margin: 0 auto var(--space-lg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--text-3xl);
+        font-weight: var(--weight-bold);
+        color: var(--primary);
+      }
+      .team-card__name {
+        font-size: var(--text-xl);
+        margin-bottom: var(--space-xs);
+      }
+      .team-card__role {
+        color: var(--accent);
+        font-size: var(--text-sm);
+        font-weight: var(--weight-medium);
+        margin-bottom: var(--space-md);
+      }
+      .team-card__bio {
+        font-size: var(--text-sm);
+        color: var(--text-muted);
+        line-height: var(--leading-relaxed);
+      }
+      .timeline {
+        position: relative;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 2px;
+        height: 100%;
+        background: var(--border);
+      }
+      @media (max-width: 640px) {
+        .timeline::before {
+          left: 20px;
+        }
+      }
+      .timeline-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: var(--space-2xl);
+      }
+      .timeline-item:nth-child(odd) {
+        flex-direction: row-reverse;
+      }
+      @media (max-width: 640px) {
+        .timeline-item,
+        .timeline-item:nth-child(odd) {
+          flex-direction: row;
+          padding-left: 50px;
+        }
+      }
+      .timeline-item__content {
+        width: 45%;
+        padding: var(--space-lg);
+        background: var(--primary-light);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+      }
+      @media (max-width: 640px) {
+        .timeline-item__content {
+          width: 100%;
+        }
+      }
+      .timeline-item__year {
+        color: var(--accent);
+        font-weight: var(--weight-bold);
+        font-size: var(--text-lg);
+        margin-bottom: var(--space-sm);
+      }
+      .timeline-item__text {
+        color: var(--text-muted);
+        font-size: var(--text-sm);
+      }
+      .timeline-item__dot {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 16px;
+        height: 16px;
+        background: var(--accent);
+        border-radius: var(--radius-full);
+        border: 3px solid var(--primary);
+      }
+      @media (max-width: 640px) {
+        .timeline-item__dot {
+          left: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar__inner">
+          <a href="index.html" class="navbar__logo">
+            <div class="navbar__logo-icon">LRB</div>
+            <div class="navbar__logo-text">L R B <span>&</span> Company</div>
+          </a>
+          <ul class="navbar__menu">
+            <li><a href="index.html" class="navbar__link">Home</a></li>
+            <li>
+              <a href="about.html" class="navbar__link active">About Us</a>
+            </li>
+            <li>
+              <a href="services.html" class="navbar__link">Services</a>
+            </li>
+            <li>
+              <a href="startup-assistance.html" class="navbar__link"
+                >Startups</a
+              >
+            </li>
+            <li><a href="index.html#tools" class="navbar__link">Tools</a></li>
+            <li><a href="resources.html" class="navbar__link">Resources</a></li>
+            <li><a href="contact.html" class="navbar__link">Contact</a></li>
+            <li class="navbar__cta">
+              <a href="contact.html" class="btn btn--primary">Get Appointed</a>
+            </li>
+          </ul>
+          <button class="navbar__toggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- About Hero -->
+    <section class="about-hero">
+      <div class="container">
+        <div class="about-hero__grid">
+          <div class="about-hero__content">
+            <h1>Who We Are</h1>
+            <p>
+              L R B & Company is a newly established yet highly experienced
+              financial consultancy firm based in Pune, Maharashtra. Our team
+              brings rich expertise from Big4 accounting firms and Fortune 500
+              companies, serving top listed and MNC companies with excellence.
+            </p>
+            <p style="margin-top: var(--space-lg)">
+              We are a customer-centric firm committed to keeping accounting and
+              finance sectors neat and transparent. Our philosophy centers on
+              being self-motivated and highly committed to our clients' success.
+            </p>
+          </div>
+          <div class="about-hero__image">
+            <div class="about-hero__logo">LRB</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Values -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-header__tag">Our Values</span>
+          <h2 class="section-header__title">What Drives Us</h2>
+        </div>
+
+        <div class="values-grid">
+          <div class="card value-card">
+            <div class="value-card__icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <h4 class="card__title">Integrity</h4>
+            <p class="card__text">
+              We uphold the highest ethical standards in everything we do,
+              ensuring complete transparency and honesty in our client
+              relationships.
+            </p>
+          </div>
+
+          <div class="card value-card">
+            <div class="value-card__icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l4 2" />
+              </svg>
+            </div>
+            <h4 class="card__title">Excellence</h4>
+            <p class="card__text">
+              We strive for excellence in every engagement, continuously
+              improving our skills and staying updated with the latest
+              regulations.
+            </p>
+          </div>
+
+          <div class="card value-card">
+            <div class="value-card__icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <h4 class="card__title">Client Focus</h4>
+            <p class="card__text">
+              Every solution we provide is tailored to meet the unique needs of
+              our clients, ensuring maximum value and impact.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leadership -->
+    <section class="section team-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-header__tag">Leadership</span>
+          <h2 class="section-header__title">Meet Our Team</h2>
+        </div>
+
+        <div style="max-width: 600px; margin: 0 auto">
+          <div class="team-card" style="padding: var(--space-2xl)">
+            <div
+              class="team-card__avatar"
+              style="
+                width: 150px;
+                height: 150px;
+                overflow: hidden;
+                border: 4px solid var(--primary);
+                box-shadow: var(--shadow-md);
+              "
+            >
+              <img
+                src="images/ProfileAvatar.jpg"
+                alt="CA Lalit Badgujar"
+                style="width: 100%; height: 100%; object-fit: cover"
+              />
+            </div>
+            <h4 class="team-card__name" style="font-size: var(--text-2xl)">
+              CA Lalit Badgujar
+            </h4>
+            <p class="team-card__role">Founder & Managing Partner</p>
+            <p
+              style="
+                color: var(--text-muted);
+                font-size: var(--text-sm);
+                margin-bottom: var(--space-lg);
+              "
+            >
+              Ex-Vodafone | Ex-Deloitte/EY
+            </p>
+            <p class="team-card__bio" style="max-width: 450px; margin: 0 auto">
+              A qualified Chartered Accountant with over
+              <strong>12 years of experience</strong> in Risk Advisory and Audit
+              & Assurance. His specializations include
+              <strong
+                >SOX Compliance, IFC/ICFR regulation, Due Diligence, Forensic
+                Audit,</strong
+              >
+              and <strong>International Taxation</strong>.
+            </p>
+            <p
+              class="team-card__bio"
+              style="max-width: 450px; margin: var(--space-md) auto 0"
+            >
+              Known for negotiating with external auditors to ensure smooth,
+              no-surprise audit experiences, he is a people person who nurtures
+              and motivates his team to excellence.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Journey Timeline -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-header__tag">Our Expertise</span>
+          <h2 class="section-header__title">What Sets Us Apart</h2>
+        </div>
+
+        <div
+          class="grid grid-2"
+          style="gap: var(--space-xl); max-width: 900px; margin: 0 auto"
+        >
+          <div class="card">
+            <h4 class="card__title" style="color: var(--accent)">
+              Big4 Experience
+            </h4>
+            <p class="card__text">
+              Our leadership brings rich experience from Deloitte, EY, and
+              Fortune 500 companies like Vodafone.
+            </p>
+          </div>
+          <div class="card">
+            <h4 class="card__title" style="color: var(--accent)">
+              SOX & ICFR Specialists
+            </h4>
+            <p class="card__text">
+              Deep expertise in S404 Audit Compliance, Internal Controls, and
+              setting up 2nd line of defense.
+            </p>
+          </div>
+          <div class="card">
+            <h4 class="card__title" style="color: var(--accent)">
+              Domestic & International
+            </h4>
+            <p class="card__text">
+              Serving Indian corporates and US businesses with tax registration,
+              preparation, and CPA outsourcing.
+            </p>
+          </div>
+          <div class="card">
+            <h4 class="card__title" style="color: var(--accent)">
+              Quality Assurance
+            </h4>
+            <p class="card__text">
+              Advisory on Companies Act 2013, SEBI limited reviews, and
+              comprehensive quality assurance reviews.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="contact-strip">
+      <div class="container">
+        <div class="contact-strip__inner">
+          <div>
+            <h3 style="color: var(--primary); margin-bottom: var(--space-sm)">
+              Let's Work Together
+            </h3>
+            <p style="color: var(--primary); opacity: 0.8">
+              Ready to experience the L R B difference?
+            </p>
+          </div>
+          <div class="contact-strip__cta">
+            <a
+              href="contact.html"
+              class="btn"
+              style="background: var(--primary); color: var(--text)"
+              >Get in Touch</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__bottom" style="border-top: none; padding-top: 0">
+          <p class="footer__copyright">
+            © 2026 L R B & Company. All rights reserved.
+          </p>
+          <div class="footer__legal">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+  </body>
+</html>

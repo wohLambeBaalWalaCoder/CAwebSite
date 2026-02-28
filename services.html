@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="L R B & Company Services - Accounting, Audit, Compliance, Taxation, Virtual CFO, RERA, IPO Readiness. Your one-stop financial solutions partner."
+    />
+    <title>Our Services | L R B & Company</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%2365AC4C' rx='15' width='100' height='100'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='50' font-weight='bold' fill='%23FFFFFF'>LRB</text></svg>"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+    <style>
+      .services-hero {
+        background: var(--primary-dark);
+        padding: calc(80px + var(--space-3xl)) 0 var(--space-3xl);
+        text-align: center;
+      }
+      .services-hero__title {
+        font-size: var(--text-4xl);
+        margin-bottom: var(--space-md);
+      }
+      .services-hero__subtitle {
+        font-size: var(--text-lg);
+        color: var(--text-muted);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .service-category {
+        padding: var(--space-3xl) 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .service-category:last-child {
+        border-bottom: none;
+      }
+      .service-category:nth-child(even) {
+        background: var(--primary-dark);
+      }
+      .category-header {
+        display: flex;
+        align-items: center;
+        gap: var(--space-lg);
+        margin-bottom: var(--space-xl);
+      }
+      .category-number {
+        width: 48px;
+        height: 48px;
+        background: var(--gradient-accent);
+        border-radius: var(--radius-lg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--text-xl);
+        font-weight: var(--weight-bold);
+        color: var(--primary);
+        flex-shrink: 0;
+      }
+      .category-title {
+        font-size: var(--text-2xl);
+        margin: 0;
+      }
+      .service-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--space-lg);
+      }
+      .service-item {
+        background: var(--primary-light);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-xl);
+        padding: var(--space-xl);
+        transition: all var(--transition-base);
+      }
+      .service-item:hover {
+        border-color: var(--accent);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-card);
+      }
+      .service-item__badge {
+        display: inline-block;
+        background: var(--accent);
+        color: var(--primary);
+        font-size: var(--text-xs);
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-weight: var(--weight-semibold);
+        margin-bottom: var(--space-sm);
+      }
+      .service-item__title {
+        font-size: var(--text-lg);
+        margin-bottom: var(--space-sm);
+        color: var(--text);
+      }
+      .service-item__text {
+        font-size: var(--text-sm);
+        color: var(--text-muted);
+        line-height: var(--leading-relaxed);
+        margin-bottom: var(--space-md);
+      }
+      .service-item__link {
+        font-size: var(--text-sm);
+        color: var(--accent);
+        font-weight: var(--weight-medium);
+      }
+      .cta-section {
+        background: var(--gradient-accent);
+        padding: var(--space-3xl) 0;
+        text-align: center;
+      }
+      .cta-section h2 {
+        color: var(--primary);
+        font-size: var(--text-3xl);
+        margin-bottom: var(--space-md);
+      }
+      .cta-section p {
+        color: var(--primary);
+        opacity: 0.8;
+        margin-bottom: var(--space-xl);
+        font-size: var(--text-lg);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar__inner">
+          <a href="index.html" class="navbar__logo">
+            <div class="navbar__logo-icon">LRB</div>
+            <div class="navbar__logo-text">L R B <span>&</span> Company</div>
+          </a>
+          <ul class="navbar__menu">
+            <li><a href="index.html" class="navbar__link">Home</a></li>
+            <li><a href="about.html" class="navbar__link">About Us</a></li>
+            <li>
+              <a href="services.html" class="navbar__link active">Services</a>
+            </li>
+            <li>
+              <a href="startup-assistance.html" class="navbar__link"
+                >Startups</a
+              >
+            </li>
+            <li><a href="index.html#tools" class="navbar__link">Tools</a></li>
+            <li><a href="resources.html" class="navbar__link">Resources</a></li>
+            <li><a href="contact.html" class="navbar__link">Contact</a></li>
+            <li class="navbar__cta">
+              <a href="contact.html" class="btn btn--primary">Get Appointed</a>
+            </li>
+          </ul>
+          <button class="navbar__toggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="services-hero">
+      <div class="container">
+        <h1 class="services-hero__title">Our Services</h1>
+        <p class="services-hero__subtitle">
+          Your one-stop solution for financial operations, compliance, taxation,
+          and business support. From SMEs to large corporates, we deliver
+          excellence.
+        </p>
+      </div>
+    </section>
+
+    <!-- Category 1: Outsourcing & Financial Operations -->
+    <section class="service-category">
+      <div class="container">
+        <div class="category-header">
+          <div class="category-number">1</div>
+          <h2 class="category-title">Outsourcing & Financial Operations</h2>
+        </div>
+        <div class="service-grid">
+          <div class="service-item">
+            <h3 class="service-item__title">Accounting Process Outsourcing</h3>
+            <p class="service-item__text">
+              Designed to replace or support in-house staff. Covers bookkeeping,
+              year-end financial reporting, management accounting, invoicing,
+              payroll administration, and supplier ledger management. Flexible
+              staffing from junior to high-end manager levels.
+            </p>
+            <a href="services/outsourcing.html" class="service-item__link"
+              >Learn More →</a
+            >
+          </div>
+          <div class="service-item">
+            <h3 class="service-item__title">Virtual CFO Services</h3>
+            <p class="service-item__text">
+              Tailored for SMEs that cannot afford a full-time CFO. Includes a
+              qualified CA to guide your finance team, monthly MIS reports (P&L,
+              Balance Sheet, Ratios), cash flow management, and monthly business
+              reviews.
+            </p>
+            <a href="services/business-support.html" class="service-item__link"
+              >Learn More →</a
+            >
+          </div>
+          <div class="service-item">
+            <h3 class="service-item__title">Payroll Management</h3>
+            <p class="service-item__text">
+              Comprehensive payroll handling including staff tax planning,
+              payslip preparation, investment proof verification, and Form 16
+              issuance. Complete statutory compliance with PF, ESI, and TDS.
+            </p>
+            <a href="services/business-support.html" class="service-item__link"
+              >Learn More →</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category 2: Audit & Compliance -->
+    <section class="service-category">
+      <div class="container">
+        <div class="category-header">
+          <div class="category-number">2</div>
+          <h2 class="category-title">Audit & Compliance</h2>
+        </div>
+        <div class="service-grid">
+          <div class="service-item">
+            <span class="service-item__badge">BIG4 EXPERTISE</span>
+            <h3 class="service-item__title">
+              Internal Controls & SOX Compliance
+            </h3>
+            <p class="service-item__text">
+              Services for mid-to-large-sized companies, leveraging experience
+              from Big4 and Fortune 500 companies. S404 audit compliance, ICFR
+              setup, and establishing 2nd line of defense.
+            </p>
+            <a href="services/compliance-audit.html" class="service-item__link"
+              >Learn More →</a
+            >
+          </div>
+          <div class="service-item">
+            <h3 class="service-item__title">Quality Assurance Reviews</h3>
+            <p class="service-item__text">
+              Independent evaluation of management proficiency and skills.
+              Quality checks on financial statements, processes, and controls
+              with auditors having high interpersonal skills.
+            </p>
+            <a href="services/compliance-audit.html" class="service-item__link"
+              >Learn More →</a
+            >
+          </div>
+          <div class="service-item">
+            <h3 class="service-item__title">GITC/IT System Audit</h3>
+            <p class="service-item__text">
+              Specifically focused on designing and performing SOX evaluation
+              and testing for IT systems. General IT Controls assessment and
+              security audits for technology infrastructure.
+            </p>
+            <a href="services/compliance-audit.html" class="service-item__link"
+              >Learn More →</a
+            >
+          </div>
+          <div class="service-item">
+            <span class="service-item__badge">500+ PROJECTS</span>
+            <h3 class="service-item__title">RERA Compliance Services</h3>
+            <p class="service-item__text">
+              A major area of expertise with over 500 projects registered in
+              Pune/PCMC and Maharashtra. RERA registration and full liaison with
+              MahaRERA authorities for real estate developers.
+            </p>
+            <a href="services/compliance-audit.html" class="service-item__link"
+              >Learn More →</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category 3: Corporate Strategy & Legal -->
+    <section class="service-category">
+      <div class="container">
+        <div class="category-header">
+          <div class="category-number">3</div>
+          <h2 class="category-title">Corporate Strategy & Legal</h2>
+        </div>
+        <div class="service-grid">
+          <div class="service-item">
+            <span class="service-item__badge">ENTERPRISE</span>
+            <h3 class="service-item__title">IPO Readiness</h3>
+            <p class="service-item__text">
+              Due diligence services to help clients understand SEBI, Audit, and
+              MCA requirements well in advance of a listing. Ensure a
+              hassle-free IPO experience with comprehensive preparation.
+            </p>
+            <a href="services/business-support.html" class="service-item__link"
+              >Learn More →</a
+            >
+          </div>
+          <div class="service-item">
+            <h3 class="service-item__title">Registration Services</h3>
+            <p class="service-item__text">
+              Assistance with understanding applicable laws and liaison with
+              authorities. Includes drafting agreements and handling
+              registrations for PAN, TAN, GST, IEC Code, Partnership firms,
+              LLPs, Private/Public Limited companies, Trademarks, and Trusts.
+            </p>
+            <a href="services/business-support.html" class="service-item__link"
+              >Learn More →</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category 4: Taxation -->
+    <section class="service-category">
+      <div class="container">
+        <div class="category-header">
+          <div class="category-number">4</div>
+          <h2 class="category-title">Taxation</h2>
+        </div>
+        <div class="service-grid">
+          <div class="service-item">
+            <h3 class="service-item__title">Indirect Tax Services (GST)</h3>
+            <p class="service-item__text">
+              Consulting on GST applicability, compliant accounting, return
+              filing, and GST audits. We also offer branch and vendor audits
+              with focus on value addition and process improvement.
+            </p>
+            <a href="services/taxation-legal.html" class="service-item__link"
+              >Learn More →</a
+            >
+          </div>
+          <div class="service-item">
+            <h3 class="service-item__title">Income Tax Services</h3>
+            <p class="service-item__text">
+              Complete income tax solutions including return filing, tax
+              planning, advance tax calculations, and representation before tax
+              authorities for individuals and corporates.
+            </p>
+            <a href="services/taxation-legal.html" class="service-item__link"
+              >Learn More →</a
+            >
+          </div>
+          <div class="service-item">
+            <span class="service-item__badge">USA SERVICES</span>
+            <h3 class="service-item__title">US CPA Outsourcing & USA Tax</h3>
+            <p class="service-item__text">
+              Audit outsourcing model for US CPA firms to reduce costs. Expert
+              tax registration and tax preparation services for USA businesses
+              with federal and state tax compliance.
+            </p>
+            <a href="services/outsourcing.html" class="service-item__link"
+              >Learn More →</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category 5: Startup Assistance -->
+    <section
+      class="service-category"
+      style="
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark) 0%,
+          var(--primary) 100%
+        );
+        position: relative;
+        overflow: hidden;
+      "
+    >
+      <div
+        style="
+          position: absolute;
+          font-size: 200px;
+          opacity: 0.03;
+          top: 50%;
+          right: 10%;
+          transform: translateY(-50%);
+        "
+      >
+        🚀
+      </div>
+      <div class="container">
+        <div class="category-header">
+          <div
+            class="category-number"
+            style="background: var(--accent); color: var(--primary)"
+          >
+            🚀
+          </div>
+          <h2 class="category-title">Startup Assistance</h2>
+        </div>
+        <p
+          style="
+            color: var(--text-muted);
+            margin-bottom: var(--space-xl);
+            max-width: 600px;
+          "
+        >
+          Your one-stop solution for launching a new business. From registration
+          to digital presence, we help startups get off the ground.
+        </p>
+        <div class="service-grid">
+          <div class="service-item">
+            <span class="service-item__badge">POPULAR</span>
+            <h3 class="service-item__title">Business Registration</h3>
+            <p class="service-item__text">
+              Pvt Ltd, LLP, OPC, Partnership, Proprietorship — we handle all
+              types of business incorporation with complete documentation.
+            </p>
+            <a href="startup-assistance.html" class="service-item__link"
+              >Learn More →</a
+            >
+          </div>
+          <div class="service-item">
+            <h3 class="service-item__title">Website & Digital Marketing</h3>
+            <p class="service-item__text">
+              Website design, ERP, logo, branding, SEO, Google ranking, and lead
+              generation services for startups.
+            </p>
+            <a href="startup-assistance.html" class="service-item__link"
+              >Learn More →</a
+            >
+          </div>
+          <div class="service-item">
+            <h3 class="service-item__title">GST & Compliance Setup</h3>
+            <p class="service-item__text">
+              GST registration, return filing, ESI, PF, Professional Tax, Udyam,
+              and DSC — all essential startup compliance.
+            </p>
+            <a href="startup-assistance.html" class="service-item__link"
+              >Learn More →</a
+            >
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: var(--space-2xl)">
+          <a href="startup-assistance.html" class="btn btn--primary btn--lg"
+            >Explore Startup Services →</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>Ready to Get Started?</h2>
+        <p>
+          Let us be your trusted financial partner. Contact us for a free
+          consultation.
+        </p>
+        <a
+          href="contact.html"
+          class="btn"
+          style="background: var(--primary); color: var(--text)"
+        >
+          Schedule Free Consultation
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__bottom" style="border-top: none; padding-top: 0">
+          <p class="footer__copyright">
+            © 2026 L R B & Company. All rights reserved.
+          </p>
+          <div class="footer__legal">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+  </body>
+</html>
