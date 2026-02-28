@@ -68,6 +68,28 @@
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: var(--space-lg);
       }
+      @media (max-width: 768px) {
+        .service-grid {
+          display: flex;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          gap: var(--space-md);
+          padding-bottom: var(--space-md);
+          padding-left: var(--space-md);
+          padding-right: var(--space-md);
+          margin-left: calc(-1 * var(--space-lg));
+          margin-right: calc(-1 * var(--space-lg));
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .service-grid::-webkit-scrollbar {
+          display: none;
+        }
+        .service-item {
+          flex: 0 0 calc(85vw - var(--space-lg));
+          scroll-snap-align: center;
+        }
+      }
       .service-item {
         background: var(--primary-light);
         border: 1px solid var(--border);
@@ -256,18 +278,6 @@
               Specifically focused on designing and performing SOX evaluation
               and testing for IT systems. General IT Controls assessment and
               security audits for technology infrastructure.
-            </p>
-            <a href="services/compliance-audit.html" class="service-item__link"
-              >Learn More →</a
-            >
-          </div>
-          <div class="service-item">
-            <span class="service-item__badge">500+ PROJECTS</span>
-            <h3 class="service-item__title">RERA Compliance Services</h3>
-            <p class="service-item__text">
-              A major area of expertise with over 500 projects registered in
-              Pune/PCMC and Maharashtra. RERA registration and full liaison with
-              MahaRERA authorities for real estate developers.
             </p>
             <a href="services/compliance-audit.html" class="service-item__link"
               >Learn More →</a

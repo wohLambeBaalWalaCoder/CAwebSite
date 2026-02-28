@@ -14,6 +14,287 @@
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%2365AC4C' rx='15' width='100' height='100'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='50' font-weight='bold' fill='%23FFFFFF'>LRB</text></svg>"
     />
     <link rel="stylesheet" href="../styles/main.css" />
+    <style>
+      .page-header {
+        background: var(--primary-dark);
+        padding: calc(80px + var(--space-3xl)) 0 var(--space-2xl);
+        position: relative;
+        overflow: hidden;
+      }
+      .page-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(
+          circle at top right,
+          var(--accent-light) 0%,
+          transparent 70%
+        );
+        opacity: 0.5;
+      }
+      .page-header__title {
+        font-size: var(--text-4xl);
+        margin-bottom: var(--space-sm);
+        position: relative;
+      }
+      .page-header__breadcrumb {
+        font-size: var(--text-sm);
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: var(--space-xs);
+        position: relative;
+      }
+      .page-header__breadcrumb a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .page-header__breadcrumb a:hover {
+        text-decoration: underline;
+      }
+
+      .expertise-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--space-lg);
+        margin-bottom: var(--space-2xl);
+      }
+
+      .benefit-item {
+        display: flex;
+        gap: var(--space-md);
+        margin-bottom: var(--space-md);
+      }
+      .benefit-icon {
+        color: var(--accent);
+        flex-shrink: 0;
+        font-weight: bold;
+      }
+      .bottom-actions-flex {
+        display: flex;
+        gap: var(--space-2xl);
+        align-items: stretch;
+      }
+      
+      .bottom-action-card--light {
+        flex: 1;
+        background: linear-gradient(145deg, var(--background), var(--primary-light));
+        padding: var(--space-3xl);
+        margin-bottom: 0;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(0,0,0,0.05);
+        box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);
+      }
+      .bottom-action-card--light::before {
+        content: "";
+        position: absolute;
+        top: -50px;
+        right: -50px;
+        width: 150px;
+        height: 150px;
+        background: radial-gradient(circle, var(--accent-light) 0%, transparent 70%);
+        border-radius: 50%;
+        opacity: 0.6;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .bottom-action-card--light > * {
+        position: relative;
+        z-index: 1;
+      }
+      .bottom-action-card--light h4 {
+        font-size: var(--text-2xl);
+        padding-bottom: var(--space-md);
+        margin-bottom: var(--space-xl);
+        border-bottom: 2px solid var(--accent-light);
+        display: inline-block;
+      }
+      .bottom-action-card--light ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+      .bottom-action-card--light .card__link,
+      .bottom-action-card--light .footer__link {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        padding: var(--space-md) var(--space-lg) !important;
+        background: var(--background) !important;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+        font-size: var(--text-base) !important;
+        font-weight: 500;
+        color: var(--text-secondary);
+        transition: all 0.3s ease;
+        margin: 0 !important;
+        width: 100%;
+        text-decoration: none;
+        cursor: pointer !important;
+      }
+      .bottom-action-card--light .card__link:hover,
+      .bottom-action-card--light .footer__link:hover {
+        background: var(--primary) !important;
+        border-color: var(--accent);
+        color: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      }
+      .bottom-action-card--light .card__link span,
+      .bottom-action-card--light .footer__link span {
+        color: var(--accent) !important;
+        font-weight: bold !important;
+        margin-right: var(--space-md) !important;
+        transition: transform 0.3s ease;
+        display: inline-block;
+      }
+      .bottom-action-card--light .card__link:hover span,
+      .bottom-action-card--light .footer__link:hover span {
+        transform: translateX(4px);
+      }
+
+      @media (max-width: 992px) {
+        #why-choose-grid {
+          grid-template-columns: 1fr !important;
+          gap: var(--space-2xl) !important;
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .expertise-grid {
+          display: flex;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          gap: var(--space-md);
+          margin-left: calc(-1 * var(--space-lg));
+          margin-right: calc(-1 * var(--space-lg));
+          padding: 0 var(--space-lg) var(--space-md);
+          scrollbar-width: none;
+        }
+        .expertise-grid::-webkit-scrollbar {
+          display: none;
+        }
+        .expertise-grid .card {
+          flex: 0 0 82vw;
+          scroll-snap-align: center;
+          margin-bottom: 0 !important;
+          box-shadow: var(--shadow-sm);
+        }
+        .expertise-grid .card__title {
+          font-size: var(--text-lg) !important;
+          margin-bottom: var(--space-xs);
+        }
+        .expertise-grid .card__text {
+          font-size: var(--text-xs);
+          line-height: var(--leading-tight);
+        }
+        .section-header,
+        .mb-2xl h2 {
+          text-align: center !important;
+        }
+        .intro-text {
+          text-align: center !important;
+          font-size: var(--text-lg) !important;
+        }
+        .feature-block {
+          padding: var(--space-2xl) var(--space-xl) !important;
+        }
+        #why-choose-grid .grid-2 {
+          grid-template-columns: 1fr !important;
+          gap: var(--space-xl) !important;
+        }
+        .bottom-action-card {
+          padding: var(--space-xl) !important;
+        }
+        .bottom-action-card .grid-2 {
+          grid-template-columns: 1fr !important;
+        }
+        .bottom-actions-flex {
+          flex-direction: column !important;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .feature-block {
+          padding: var(--space-xl) var(--space-lg) !important;
+          border-radius: var(--radius-xl) !important;
+        }
+        .benefit-item {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: var(--space-xs);
+          padding: var(--space-lg);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-lg);
+          background: var(--background);
+        }
+        aside .card:first-child {
+          text-align: center;
+          padding: var(--space-xl) !important;
+        }
+        .bottom-action-card {
+          border: 1px solid var(--border);
+          border-radius: var(--radius-xl);
+          margin-bottom: var(--space-lg) !important;
+        }
+        .bottom-action-card .footer__links {
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: center !important;
+          gap: var(--space-xs) !important;
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+        .bottom-action-card .footer__links li {
+          width: 100%;
+          text-align: center;
+        }
+        .bottom-action-card .footer__links .card__link,
+        .bottom-action-card .footer__links .footer__link {
+          justify-content: center !important;
+          display: inline-flex !important;
+          padding-top: 4px !important;
+          padding-bottom: 4px !important;
+          margin-top: 0 !important;
+          margin-bottom: 0 !important;
+          border: none !important;
+          box-shadow: none !important;
+        }
+        .bottom-action-card--light h4 {
+          text-align: center;
+          display: block;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .navbar__logo-text {
+          font-size: var(--text-base);
+        }
+        .navbar__logo-icon {
+          width: 38px;
+          height: 38px;
+          font-size: var(--text-sm);
+        }
+        .navbar__inner {
+          gap: var(--space-xs);
+        }
+        .navbar__logo-text span {
+          display: none;
+        }
+        .navbar .container {
+          padding-left: var(--space-sm);
+          padding-right: var(--space-sm);
+        }
+      }
+    </style>
   </head>
   <body>
     <!-- Navigation -->
@@ -69,354 +350,162 @@
     <!-- Main Content -->
     <main class="section">
       <div class="container">
-        <div
-          class="grid grid-2"
-          style="gap: var(--space-3xl); align-items: start"
-        >
-          <!-- Content -->
-          <div>
-            <p
-              class="text-lg mb-xl"
-              style="
-                font-size: var(--text-xl);
-                line-height: var(--leading-relaxed);
-              "
-            >
-              Our Accounting Process Outsourcing is designed to replace or
-              support your in-house staff. We offer flexibility with staff from
-              junior to high-end manager levels for bookkeeping, reporting, and
-              financial operations.
+        <!-- Intro Section -->
+        <div style="max-width: 800px; margin: 0 auto var(--space-4xl); text-align: center;">
+          <p class="intro-text" style="font-size: var(--text-2xl); line-height: var(--leading-relaxed); color: var(--text-secondary);">
+            Our Accounting Process Outsourcing is designed to replace or support your in-house staff. We offer flexibility with staff from junior to high-end manager levels for bookkeeping, reporting, and financial operations.
+          </p>
+        </div>
+
+        <!-- Core Expertise -->
+        <div class="mb-4xl section" style="padding-top: 0">
+          <div class="section-header">
+            <h2 class="section-header__title">What We Offer</h2>
+            <div style="width: 60px; height: 4px; background: var(--accent); margin: 0 auto; border-radius: 2px;"></div>
+            <p class="section-header__text" style="margin-top: var(--space-md)">
+              Specialized outsourcing solutions designed to scale with your business
             </p>
+          </div>
 
-            <div class="mb-2xl">
-              <h2
-                style="
-                  font-size: var(--text-2xl);
-                  margin-bottom: var(--space-lg);
-                "
-              >
-                What We Offer
-              </h2>
-
-              <div class="card mb-lg">
-                <h3 class="card__title">Accounts Payable</h3>
-                <p class="card__text">
-                  Invoice processing, vendor management, payment scheduling, and
-                  reconciliation. Ensure timely payments while maintaining
-                  optimal cash flow.
-                </p>
+          <div class="expertise-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr))">
+            <div class="card">
+              <div class="card__icon" style="margin-bottom: var(--space-md); width: 48px; height: 48px; background: var(--accent-light); color: var(--accent); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
               </div>
-
-              <div class="card mb-lg">
-                <h3 class="card__title">Accounts Receivable</h3>
-                <p class="card__text">
-                  Invoice generation, collections management, aging analysis,
-                  and customer statements. Improve your cash collection cycle
-                  and reduce DSO.
-                </p>
-              </div>
-
-              <div class="card mb-lg">
-                <h3 class="card__title">Bookkeeping & GL</h3>
-                <p class="card__text">
-                  Daily transaction recording, bank reconciliations, journal
-                  entries, and general ledger maintenance with monthly/quarterly
-                  reporting.
-                </p>
-              </div>
-
-              <div class="card mb-lg">
-                <h3 class="card__title">Financial Reporting</h3>
-                <p class="card__text">
-                  Preparation of financial statements, management reports,
-                  variance analysis, and custom dashboards for informed
-                  decision-making.
-                </p>
-              </div>
-
-              <div class="card mb-lg" style="border-color: var(--accent)">
-                <span
-                  style="
-                    display: inline-block;
-                    background: var(--accent);
-                    color: var(--primary);
-                    font-size: var(--text-xs);
-                    padding: 4px 12px;
-                    border-radius: 20px;
-                    margin-bottom: var(--space-sm);
-                    font-weight: var(--weight-semibold);
-                  "
-                  >USA SERVICES</span
-                >
-                <h3 class="card__title">US CPA Audit Outsourcing</h3>
-                <p class="card__text">
-                  Our audit outsourcing model helps US CPA firms reduce costs
-                  while maintaining quality. We handle audit preparation,
-                  documentation, and support for your American clients.
-                </p>
-              </div>
-
-              <div class="card mb-lg" style="border-color: var(--accent)">
-                <span
-                  style="
-                    display: inline-block;
-                    background: var(--accent);
-                    color: var(--primary);
-                    font-size: var(--text-xs);
-                    padding: 4px 12px;
-                    border-radius: 20px;
-                    margin-bottom: var(--space-sm);
-                    font-weight: var(--weight-semibold);
-                  "
-                  >USA SERVICES</span
-                >
-                <h3 class="card__title">USA Tax Services</h3>
-                <p class="card__text">
-                  Expert tax registration and tax preparation services for USA
-                  businesses. We help US entrepreneurs and companies with
-                  federal and state tax compliance.
-                </p>
-              </div>
+              <h3 class="card__title">Accounts Payable</h3>
+              <p class="card__text">
+                Invoice processing, vendor management, payment scheduling, and reconciliation. Ensure timely payments while maintaining optimal cash flow.
+              </p>
             </div>
 
-            <!-- Benefits -->
-            <div class="mb-2xl">
-              <h2
-                style="
-                  font-size: var(--text-2xl);
-                  margin-bottom: var(--space-lg);
-                "
-              >
-                Why Outsource to Us?
-              </h2>
-              <div class="grid grid-2" style="gap: var(--space-md)">
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    gap: var(--space-sm);
-                    color: var(--text-secondary);
-                  "
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="var(--success)"
-                    stroke-width="2"
-                  >
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  Cost Reduction up to 50%
+            <div class="card">
+              <div class="card__icon" style="margin-bottom: var(--space-md); width: 48px; height: 48px; background: var(--accent-light); color: var(--accent); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </div>
+              <h3 class="card__title">Accounts Receivable</h3>
+              <p class="card__text">
+                Invoice generation, collections management, aging analysis, and customer statements. Improve your cash collection cycle and reduce DSO.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="card__icon" style="margin-bottom: var(--space-md); width: 48px; height: 48px; background: var(--accent-light); color: var(--accent); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              </div>
+              <h3 class="card__title">Bookkeeping & GL</h3>
+              <p class="card__text">
+                Daily transaction recording, bank reconciliations, journal entries, and general ledger maintenance with monthly/quarterly reporting.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="card__icon" style="margin-bottom: var(--space-md); width: 48px; height: 48px; background: var(--accent-light); color: var(--accent); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+              </div>
+              <h3 class="card__title">Financial Reporting</h3>
+              <p class="card__text">
+                Preparation of financial statements, management reports, variance analysis, and custom dashboards for informed decision-making.
+              </p>
+            </div>
+
+            <div class="card" style="border-top: 4px solid var(--accent)">
+              <span style="display: inline-block; background: var(--accent); color: var(--primary); font-size: 10px; padding: 2px 10px; border-radius: 20px; margin-bottom: var(--space-sm); font-weight: var(--weight-semibold);">USA SERVICES</span>
+              <div class="card__icon" style="margin-bottom: var(--space-md); width: 48px; height: 48px; background: var(--accent-light); color: var(--accent); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+              <h3 class="card__title">US CPA Audit Outsourcing</h3>
+              <p class="card__text">
+                Our audit outsourcing model helps US CPA firms reduce costs while maintaining quality. We handle preparation, documentation, and support.
+              </p>
+            </div>
+
+            <div class="card" style="border-top: 4px solid var(--accent)">
+              <span style="display: inline-block; background: var(--accent); color: var(--primary); font-size: 10px; padding: 2px 10px; border-radius: 20px; margin-bottom: var(--space-sm); font-weight: var(--weight-semibold);">USA SERVICES</span>
+              <div class="card__icon" style="margin-bottom: var(--space-md); width: 48px; height: 48px; background: var(--accent-light); color: var(--accent); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              </div>
+              <h3 class="card__title">USA Tax Services</h3>
+              <p class="card__text">
+                Expert tax registration and tax preparation services for USA businesses. We help US entrepreneurs with federal and state tax compliance.
+              </p>
+            </div>
+          </div>
+        </div>
+            </div>
+
+            <!-- Why Choose Us -->
+        <div class="mb-4xl section feature-block" style="background: var(--primary-light); border-radius: var(--radius-2xl); padding: var(--space-4xl) var(--space-3xl); border: 1px solid var(--border);">
+          <div class="grid" id="why-choose-grid" style="grid-template-columns: 1fr 1.5fr; gap: var(--space-4xl); align-items: center;">
+            <div>
+              <h2 style="font-size: var(--text-3xl); margin-bottom: var(--space-md);">Why Outsource to Us?</h2>
+              <p style="color: var(--text-muted); margin-bottom: var(--space-xl); font-size: var(--text-lg); line-height: var(--leading-relaxed);">
+                Reduce costs, leverage scalable resources, and ensure data security with our dedicated offshore professionals.
+              </p>
+              <a href="../contact.html" class="btn btn--primary">Get in Touch</a>
+            </div>
+            <div class="grid grid-2" style="gap: var(--space-xl)">
+              <div class="benefit-item">
+                <span class="benefit-icon" style="font-size: 24px">✓</span>
+                <div>
+                  <h4 style="font-size: var(--text-lg); margin-bottom: 8px">Cost Reduction</h4>
+                  <p style="font-size: var(--text-sm); color: var(--text-muted)">Save up to 50% on accounting and compliance overhead.</p>
                 </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    gap: var(--space-sm);
-                    color: var(--text-secondary);
-                  "
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="var(--success)"
-                    stroke-width="2"
-                  >
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  Scalable Resources
+              </div>
+              <div class="benefit-item">
+                <span class="benefit-icon" style="font-size: 24px">✓</span>
+                <div>
+                  <h4 style="font-size: var(--text-lg); margin-bottom: 8px">Scalable Resources</h4>
+                  <p style="font-size: var(--text-sm); color: var(--text-muted)">Scale your dedicated team instantly as your business grows.</p>
                 </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    gap: var(--space-sm);
-                    color: var(--text-secondary);
-                  "
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="var(--success)"
-                    stroke-width="2"
-                  >
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  Dedicated Team
+              </div>
+              <div class="benefit-item">
+                <span class="benefit-icon" style="font-size: 24px">✓</span>
+                <div>
+                  <h4 style="font-size: var(--text-lg); margin-bottom: 8px">Industry Expertise</h4>
+                  <p style="font-size: var(--text-sm); color: var(--text-muted)">Big4 experienced professionals working in US and Ind AS standards.</p>
                 </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    gap: var(--space-sm);
-                    color: var(--text-secondary);
-                  "
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="var(--success)"
-                    stroke-width="2"
-                  >
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  Data Security
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    gap: var(--space-sm);
-                    color: var(--text-secondary);
-                  "
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="var(--success)"
-                    stroke-width="2"
-                  >
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  24/7 Support
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    gap: var(--space-sm);
-                    color: var(--text-secondary);
-                  "
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="var(--success)"
-                    stroke-width="2"
-                  >
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  Industry Expertise
+              </div>
+              <div class="benefit-item">
+                <span class="benefit-icon" style="font-size: 24px">✓</span>
+                <div>
+                  <h4 style="font-size: var(--text-lg); margin-bottom: 8px">Data Security</h4>
+                  <p style="font-size: var(--text-sm); color: var(--text-muted)">24/7 support with enterprise-grade data protection.</p>
                 </div>
               </div>
             </div>
           </div>
-
-          <!-- Sidebar -->
-          <aside>
-            <div
-              class="card"
-              style="
-                background: var(--gradient-accent);
-                color: var(--primary);
-                padding: var(--space-2xl);
-              "
-            >
-              <h4
-                style="
-                  font-size: var(--text-xl);
-                  color: var(--primary);
-                  margin-bottom: var(--space-md);
-                "
-              >
-                Get a Custom Quote
-              </h4>
-              <p
-                style="
-                  color: var(--primary);
-                  opacity: 0.8;
-                  margin-bottom: var(--space-lg);
-                "
-              >
-                Every business is unique. Let us design an outsourcing solution
-                tailored to your specific needs and budget.
-              </p>
-              <a
-                href="../contact.html"
-                class="btn"
-                style="
-                  background: var(--primary);
-                  color: var(--text);
-                  width: 100%;
-                "
-              >
-                Request Proposal
-              </a>
-            </div>
-
-            <div class="card mt-xl">
-              <h4 class="card__title">Software We Support</h4>
-              <ul class="footer__links">
-                <li>
-                  <span class="footer__link" style="cursor: default"
-                    >📊 Tally ERP</span
-                  >
-                </li>
-                <li>
-                  <span class="footer__link" style="cursor: default"
-                    >📈 QuickBooks</span
-                  >
-                </li>
-                <li>
-                  <span class="footer__link" style="cursor: default"
-                    >💼 Zoho Books</span
-                  >
-                </li>
-                <li>
-                  <span class="footer__link" style="cursor: default"
-                    >🔢 SAP</span
-                  >
-                </li>
-                <li>
-                  <span class="footer__link" style="cursor: default"
-                    >📱 Custom Solutions</span
-                  >
-                </li>
-              </ul>
-            </div>
-
-            <div class="card mt-xl">
-              <h4 class="card__title">Other Services</h4>
-              <ul class="footer__links">
-                <li>
-                  <a href="compliance-audit.html" class="footer__link"
-                    >Compliance & Audit</a
-                  >
-                </li>
-                <li>
-                  <a href="taxation-legal.html" class="footer__link"
-                    >Taxation & Legal</a
-                  >
-                </li>
-                <li>
-                  <a href="business-support.html" class="footer__link"
-                    >Business Support</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </aside>
         </div>
       </div>
     </main>
+
+    <!-- Bottom Action Cards Section -->
+    <section class="section" style="padding-top: 0">
+      <div class="container">
+        <!-- Bottom Action Cards -->
+        <div class="bottom-actions-flex">
+          <div class="card bottom-action-card" style="flex: 1; background: var(--gradient-accent); color: var(--primary); padding: var(--space-3xl); display: flex; flex-direction: column; justify-content: center; text-align: center; margin-bottom: 0;">
+            <h4 style="font-size: var(--text-2xl); color: var(--primary); margin-bottom: var(--space-md);">Get a Custom Quote</h4>
+            <p style="color: var(--primary); opacity: 0.9; margin-bottom: var(--space-lg); max-width: 400px; margin-left: auto; margin-right: auto;">
+              Every business is unique. Let us design an outsourcing solution tailored to your specific needs and budget.
+            </p>
+            <div>
+              <a href="../contact.html" class="btn" style="background: var(--primary); color: var(--text)">Request Proposal</a>
+            </div>
+          </div>
+
+          <div class="card bottom-action-card bottom-action-card--light">
+            <h4>Software We Support</h4>
+            <ul class="footer__links">
+              <li><span class="footer__link" style="cursor: default; display: inline-flex; justify-content: center;"><span>📊</span>Tally ERP</span></li>
+              <li><span class="footer__link" style="cursor: default; display: inline-flex; justify-content: center;"><span>📈</span>QuickBooks</span></li>
+              <li><span class="footer__link" style="cursor: default; display: inline-flex; justify-content: center;"><span>💼</span>Zoho Books</span></li>
+              <li><span class="footer__link" style="cursor: default; display: inline-flex; justify-content: center;"><span>🔢</span>SAP</span></li>
+              <li><span class="footer__link" style="cursor: default; display: inline-flex; justify-content: center;"><span>📱</span>Custom Solutions</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">

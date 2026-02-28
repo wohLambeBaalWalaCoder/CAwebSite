@@ -93,6 +93,27 @@
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: var(--space-md);
       }
+      @media (max-width: 640px) {
+        .service-list {
+          display: flex;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          gap: var(--space-md);
+          margin-left: calc(-1 * var(--space-lg));
+          margin-right: calc(-1 * var(--space-lg));
+          padding: 0 var(--space-lg) var(--space-md);
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .service-list::-webkit-scrollbar {
+          display: none;
+        }
+        .service-list__item {
+          flex: 0 0 80vw;
+          scroll-snap-align: center;
+          margin-bottom: 0 !important;
+        }
+      }
       .service-list__item {
         display: flex;
         align-items: center;

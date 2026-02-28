@@ -19,6 +19,11 @@
         background: var(--primary-dark);
         padding: calc(80px + var(--space-4xl)) 0 var(--space-4xl);
       }
+      @media (max-width: 640px) {
+        .about-hero {
+          padding: calc(80px + var(--space-xl)) 0 var(--space-xl);
+        }
+      }
       .about-hero__grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -34,27 +39,45 @@
         font-size: var(--text-4xl);
         margin-bottom: var(--space-lg);
       }
+      @media (max-width: 640px) {
+        .about-hero__content h1 {
+          font-size: var(--text-3xl);
+          margin-bottom: var(--space-md);
+        }
+      }
       .about-hero__content p {
         font-size: var(--text-lg);
         color: var(--text-muted);
         line-height: var(--leading-relaxed);
       }
       .about-hero__image {
-        background: var(--gradient-glass);
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(101, 172, 76, 0.2);
         border-radius: var(--radius-2xl);
         padding: var(--space-2xl);
-        border: 1px solid var(--border);
         display: flex;
         align-items: center;
         justify-content: center;
         min-height: 300px;
+        box-shadow:
+          inset 0 0 20px rgba(101, 172, 76, 0.05),
+          0 10px 40px rgba(0, 0, 0, 0.1);
       }
       .about-hero__logo {
-        font-size: 120px;
-        font-weight: var(--weight-bold);
-        color: var(--accent);
-        font-family: var(--font-heading);
-        text-shadow: 0 0 60px var(--accent-light);
+        width: 100%;
+        height: auto;
+        max-width: 300px; /* Optimal size for desktop */
+        filter: drop-shadow(0 10px 20px rgba(101, 172, 76, 0.2));
+      }
+      @media (max-width: 640px) {
+        .about-hero__image {
+          min-height: 180px;
+          padding: var(--space-lg);
+        }
+        .about-hero__logo {
+          max-width: 220px; /* Reduced for mobile */
+        }
       }
       .values-grid {
         display: grid;
@@ -63,7 +86,33 @@
       }
       @media (max-width: 768px) {
         .values-grid {
-          grid-template-columns: 1fr;
+          display: flex;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          gap: var(--space-md);
+          padding-bottom: var(--space-md);
+          padding-left: var(--space-md);
+          padding-right: var(--space-md);
+          margin-left: calc(-1 * var(--space-lg));
+          margin-right: calc(-1 * var(--space-lg));
+          scrollbar-width: none; /* Hide scrollbar Firefox */
+          -ms-overflow-style: none; /* Hide scrollbar IE/Edge */
+        }
+        .values-grid::-webkit-scrollbar {
+          display: none; /* Hide scrollbar Chrome/Safari */
+        }
+        .value-card {
+          flex: 0 0 85%;
+          scroll-snap-align: center;
+          padding: var(--space-xl);
+        }
+        .value-card__icon {
+          width: 60px;
+          height: 60px;
+        }
+        .value-card__icon svg {
+          width: 30px;
+          height: 30px;
         }
       }
       .value-card {
@@ -122,6 +171,122 @@
         font-size: var(--text-sm);
         color: var(--text-muted);
         line-height: var(--leading-relaxed);
+      }
+
+      /* New Stylish Leadership Card */
+      .leadership-card {
+        background: var(--primary-light);
+        border-radius: var(--radius-2xl);
+        padding: var(--space-3xl);
+        border: 1px solid var(--border);
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow-xl);
+        transition: transform var(--transition-base);
+      }
+      .leadership-card:hover {
+        transform: translateY(-5px);
+      }
+      .leadership-card__head {
+        display: none;
+      }
+      .leadership-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 150px;
+        height: 150px;
+        background: radial-gradient(
+          circle at top right,
+          var(--accent-light) 0%,
+          transparent 70%
+        );
+        opacity: 0.5;
+      }
+      .leadership-card__inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: var(--space-lg);
+      }
+      @media (max-width: 900px) {
+        .leadership-card__inner {
+          flex-direction: column;
+          text-align: center;
+          gap: var(--space-xl);
+        }
+      }
+      .leadership-card__avatar-wrapper {
+        flex-shrink: 0;
+        position: relative;
+      }
+      .leadership-card__avatar {
+        width: 200px;
+        height: 200px;
+        border-radius: var(--radius-xl);
+        padding: 5px;
+        background: var(--gradient-accent);
+        box-shadow: var(--shadow-lg);
+      }
+      @media (max-width: 640px) {
+        .leadership-card {
+          padding: var(--space-xl) var(--space-lg);
+        }
+        .leadership-card__avatar {
+          width: 100px;
+          height: 100px;
+        }
+        .leadership-card__name {
+          font-size: var(--text-2xl);
+        }
+        .leadership-card__role {
+          font-size: var(--text-base);
+        }
+      }
+      .leadership-card__avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: calc(var(--radius-xl) - 2px);
+      }
+      .leadership-card__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+      .leadership-card__name {
+        font-size: var(--text-3xl);
+        margin-bottom: var(--space-xs);
+        color: var(--text);
+      }
+      .leadership-card__role {
+        color: var(--accent);
+        font-size: var(--text-lg);
+        font-weight: var(--weight-semibold);
+        margin-bottom: var(--space-sm);
+      }
+      .leadership-card__exp {
+        display: inline-block;
+        font-size: var(--text-xs);
+        text-transform: uppercase;
+        letter-spacing: var(--tracking-wider);
+        padding: var(--space-xs) var(--space-md);
+        background: var(--primary-dark);
+        border-radius: var(--radius-full);
+        color: var(--text-muted);
+        margin-bottom: var(--space-lg);
+        border: 1px solid var(--border);
+      }
+      .leadership-card__bio {
+        font-size: var(--text-base);
+        color: var(--text-secondary);
+        line-height: var(--leading-relaxed);
+      }
+      .leadership-card__bio strong {
+        color: var(--text);
       }
       .timeline {
         position: relative;
@@ -251,7 +416,11 @@
             </p>
           </div>
           <div class="about-hero__image">
-            <div class="about-hero__logo">LRB</div>
+            <img
+              src="images/lrb-logo-premium.svg"
+              alt="LRB Logo"
+              class="about-hero__logo"
+            />
           </div>
         </div>
       </div>
@@ -340,55 +509,37 @@
           <h2 class="section-header__title">Meet Our Team</h2>
         </div>
 
-        <div style="max-width: 600px; margin: 0 auto">
-          <div class="team-card" style="padding: var(--space-2xl)">
-            <div
-              class="team-card__avatar"
-              style="
-                width: 150px;
-                height: 150px;
-                overflow: hidden;
-                border: 4px solid var(--primary);
-                box-shadow: var(--shadow-md);
-              "
-            >
-              <img
-                src="images/ProfileAvatar.jpg"
-                alt="CA Lalit Badgujar"
-                style="width: 100%; height: 100%; object-fit: cover"
-              />
+        <div style="max-width: 900px; margin: 0 auto">
+          <div class="leadership-card">
+            <div class="leadership-card__inner">
+              <div class="leadership-card__avatar-wrapper">
+                <div class="leadership-card__avatar">
+                  <img src="images/ProfileAvatar.jpg" alt="CA Lalit Badgujar" />
+                </div>
+              </div>
+              <div class="leadership-card__content">
+                <h3 class="leadership-card__name">CA Lalit Badgujar</h3>
+                <p class="leadership-card__role">Founder & Managing Partner</p>
+                <div class="leadership-card__exp">
+                  Ex-Vodafone | Ex-Deloitte/EY
+                </div>
+                <div class="leadership-card__bio">
+                  <p>
+                    A qualified Chartered Accountant with over
+                    <strong>12 years of experience</strong> in Risk Advisory and
+                    Audit & Assurance.
+                  </p>
+                  <p style="margin-top: var(--space-md)">
+                    Specializing in
+                    <strong
+                      >SOX Compliance, IFC/ICFR regulation, Due Diligence, and
+                      International Taxation</strong
+                    >, he is known for ensuring smooth, no-surprise audit
+                    experiences through expert negotiation and leadership.
+                  </p>
+                </div>
+              </div>
             </div>
-            <h4 class="team-card__name" style="font-size: var(--text-2xl)">
-              CA Lalit Badgujar
-            </h4>
-            <p class="team-card__role">Founder & Managing Partner</p>
-            <p
-              style="
-                color: var(--text-muted);
-                font-size: var(--text-sm);
-                margin-bottom: var(--space-lg);
-              "
-            >
-              Ex-Vodafone | Ex-Deloitte/EY
-            </p>
-            <p class="team-card__bio" style="max-width: 450px; margin: 0 auto">
-              A qualified Chartered Accountant with over
-              <strong>12 years of experience</strong> in Risk Advisory and Audit
-              & Assurance. His specializations include
-              <strong
-                >SOX Compliance, IFC/ICFR regulation, Due Diligence, Forensic
-                Audit,</strong
-              >
-              and <strong>International Taxation</strong>.
-            </p>
-            <p
-              class="team-card__bio"
-              style="max-width: 450px; margin: var(--space-md) auto 0"
-            >
-              Known for negotiating with external auditors to ensure smooth,
-              no-surprise audit experiences, he is a people person who nurtures
-              and motivates his team to excellence.
-            </p>
           </div>
         </div>
       </div>
