@@ -25,9 +25,25 @@
           grid-template-columns: repeat(2, 1fr);
         }
       }
-      @media (max-width: 600px) {
+      @media (max-width: 640px) {
         .resource-grid {
-          grid-template-columns: 1fr;
+          display: flex;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          gap: var(--space-md);
+          margin-left: calc(-1 * var(--space-lg));
+          margin-right: calc(-1 * var(--space-lg));
+          padding: 0 var(--space-lg) var(--space-md);
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .resource-grid::-webkit-scrollbar {
+          display: none;
+        }
+        .resource-card {
+          flex: 0 0 80vw;
+          scroll-snap-align: center;
+          margin-bottom: 0 !important;
         }
       }
       .resource-card {

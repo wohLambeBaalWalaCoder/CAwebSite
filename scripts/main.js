@@ -38,32 +38,46 @@ function initMobileMenu() {
   const menu = document.querySelector(".navbar__menu");
   const links = document.querySelectorAll(".navbar__link");
 
+  // Create overlay element
+  const overlay = document.createElement("div");
+  overlay.className = "navbar-overlay";
+  document.body.appendChild(overlay);
+
   if (!toggle || !menu) return;
 
-  toggle.addEventListener("click", () => {
-    menu.classList.toggle("open");
+  const closeMenu = () => {
+    menu.classList.remove("open");
+    toggle.classList.remove("active");
+    overlay.classList.remove("active");
+    document.body.style.overflow = "";
+
+    // hide overlay completely after transition
+    setTimeout(() => {
+      if (!menu.classList.contains("open")) overlay.style.display = "none";
+    }, 250);
+  };
+
+  const toggleMenu = () => {
+    const isOpen = menu.classList.toggle("open");
     toggle.classList.toggle("active");
-    document.body.style.overflow = menu.classList.contains("open")
-      ? "hidden"
-      : "";
-  });
+
+    if (isOpen) {
+      overlay.style.display = "block";
+      // Force reflow
+      void overlay.offsetWidth;
+      overlay.classList.add("active");
+      document.body.style.overflow = "hidden";
+    } else {
+      closeMenu();
+    }
+  };
+
+  toggle.addEventListener("click", toggleMenu);
+  overlay.addEventListener("click", closeMenu);
 
   // Close menu when clicking a link
   links.forEach((link) => {
-    link.addEventListener("click", () => {
-      menu.classList.remove("open");
-      toggle.classList.remove("active");
-      document.body.style.overflow = "";
-    });
-  });
-
-  // Close menu when clicking outside
-  document.addEventListener("click", (e) => {
-    if (!menu.contains(e.target) && !toggle.contains(e.target)) {
-      menu.classList.remove("open");
-      toggle.classList.remove("active");
-      document.body.style.overflow = "";
-    }
+    link.addEventListener("click", closeMenu);
   });
 }
 
