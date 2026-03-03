@@ -24,6 +24,10 @@
         position: relative;
         overflow: hidden;
       }
+      .calculator,
+      .calculator * {
+        box-sizing: border-box !important;
+      }
       .calculator::before {
         content: "";
         position: absolute;
@@ -38,6 +42,8 @@
         grid-template-columns: 1.2fr 1fr;
         gap: var(--space-4xl);
         align-items: center;
+        max-width: 100%;
+        width: 100%;
       }
       @media (max-width: 900px) {
         .calculator__grid {
@@ -48,9 +54,49 @@
           padding: var(--space-xl);
         }
       }
+      @media (max-width: 480px) {
+        .calculator {
+          padding: var(--space-md);
+          max-width: 100%;
+          width: 100%;
+          box-sizing: border-box;
+          overflow-x: hidden;
+          margin-left: 0;
+          margin-right: 0;
+        }
+        .calculator__grid {
+          width: 100%;
+          max-width: 100%;
+          min-width: 0;
+          overflow: hidden;
+        }
+        .input-group__header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: var(--space-xs);
+          width: 100%;
+        }
+        .input-group__value {
+          width: 100%;
+          text-align: left;
+          margin-top: 8px; /* Extra gap if flex gap isn't fully supported */
+        }
+        .results {
+          padding: var(--space-md);
+        }
+        .results__item {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: var(--space-xs);
+        }
+        .chart__legend {
+          flex-wrap: wrap;
+        }
+      }
       .input-group {
         margin-bottom: var(--space-2xl);
         position: relative;
+        max-width: 100%;
       }
       .input-group:last-child {
         margin-bottom: 0;
@@ -60,11 +106,14 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: var(--space-md);
+        max-width: 100%;
+        flex-wrap: wrap;
       }
       .input-group__label {
         font-size: var(--text-base);
         font-weight: var(--weight-medium);
         color: var(--text-secondary);
+        max-width: 100%;
       }
       .input-group__value {
         font-family: var(--font-heading);
@@ -76,9 +125,19 @@
         border-radius: var(--radius-md);
         border: 2px solid transparent;
         width: 140px;
+        max-width: 100%;
         text-align: right;
         transition: all var(--transition-fast);
         box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+      }
+      @media (max-width: 480px) {
+        .input-group__value {
+          width: 100%;
+          min-width: 0;
+        }
+        .input-group {
+          width: 100%;
+        }
       }
       .input-group__value:focus {
         outline: none;

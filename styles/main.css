@@ -815,6 +815,12 @@ p {
   align-items: center;
   gap: var(--space-sm);
   color: var(--primary);
+  transition: all var(--transition-fast);
+}
+
+.contact-strip__item:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
 }
 
 .contact-strip__item svg {
