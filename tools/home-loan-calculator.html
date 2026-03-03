@@ -48,6 +48,32 @@
           padding: var(--space-xl);
         }
       }
+      @media (max-width: 480px) {
+        .calculator {
+          padding: var(--space-md);
+        }
+        .input-group__header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: var(--space-xs);
+        }
+        .input-group__value {
+          width: 100%;
+          text-align: left;
+          margin-top: 8px; /* Extra gap if flex gap isn't fully supported */
+        }
+        .results {
+          padding: var(--space-md);
+        }
+        .results__item {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: var(--space-xs);
+        }
+        .chart__legend {
+          flex-wrap: wrap;
+        }
+      }
       .input-group {
         margin-bottom: var(--space-2xl);
         position: relative;

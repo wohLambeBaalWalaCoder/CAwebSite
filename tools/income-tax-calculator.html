@@ -15,6 +15,12 @@
     />
     <link rel="stylesheet" href="../styles/main.css" />
     <style>
+      html,
+      body {
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+      }
       .calculator {
         background: var(--primary);
         border-radius: var(--radius-2xl);
@@ -23,6 +29,10 @@
         box-shadow: var(--shadow-xl);
         position: relative;
         overflow: hidden;
+      }
+      .calculator,
+      .calculator * {
+        box-sizing: border-box !important;
       }
       .calculator::before {
         content: "";
@@ -37,7 +47,9 @@
         display: grid;
         grid-template-columns: 1.2fr 1fr;
         gap: var(--space-4xl);
-        align-items: flex-start;
+        align-items: center; /* Set to center like home loan */
+        max-width: 100%;
+        width: 100%;
       }
       @media (max-width: 900px) {
         .calculator__grid {
@@ -48,9 +60,52 @@
           padding: var(--space-xl);
         }
       }
+      @media (max-width: 480px) {
+        .calculator {
+          padding: var(--space-md);
+          max-width: 100%;
+          width: 100%;
+          box-sizing: border-box;
+          overflow-x: hidden;
+          margin-left: 0;
+          margin-right: 0;
+        }
+        .calculator__grid {
+          width: 100%;
+          max-width: 100%;
+          min-width: 0;
+          overflow: hidden;
+        }
+        .input-group__header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: var(--space-xs);
+          width: 100%;
+        }
+        .input-group__value {
+          width: 100%;
+          text-align: left;
+          margin-top: 8px; /* Extra gap if flex gap isn't fully supported */
+          box-sizing: border-box;
+        }
+        .results {
+          padding: var(--space-md);
+          width: 100%;
+          max-width: 100%;
+        }
+        .comparison {
+          grid-template-columns: 1fr;
+          gap: var(--space-md);
+        }
+        .comparison__box {
+          padding: var(--space-md);
+        }
+      }
       .input-group {
         margin-bottom: var(--space-2xl);
         position: relative;
+        max-width: 100%;
+        width: 100%;
       }
       .input-group:last-child {
         margin-bottom: 0;
@@ -60,11 +115,15 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: var(--space-md);
+        max-width: 100%;
+        width: 100%;
       }
       .input-group__label {
         font-size: var(--text-base);
         font-weight: var(--weight-medium);
         color: var(--text-secondary);
+        max-width: 100%;
+        flex: 1;
       }
       .input-group__value {
         font-family: var(--font-heading);
@@ -76,9 +135,66 @@
         border-radius: var(--radius-md);
         border: 2px solid transparent;
         width: 140px;
+        max-width: 100%;
         text-align: right;
         transition: all var(--transition-fast);
         box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+      }
+      @media (max-width: 480px) {
+        .input-group__value,
+        input[type="number"],
+        #grossIncomeVal,
+        #deductions80CVal,
+        #deductions80DVal {
+          width: 100% !important;
+          max-width: 100% !important;
+          min-width: 0 !important;
+          box-sizing: border-box !important;
+        }
+        .input-group {
+          width: 100%;
+        }
+        .calculator select {
+          width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
+        }
+        .dropdown-group {
+          width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
+        }
+      }
+      .dropdown-group {
+        margin-bottom: var(--space-2xl);
+        position: relative;
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .dropdown-group {
+        margin-bottom: var(--space-2xl);
+        position: relative;
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .dropdown-group select,
+      #assessmentYear {
+        width: 100%;
+        max-width: 100%;
+        padding: var(--space-sm) var(--space-md);
+        font-family: var(--font-heading);
+        font-size: var(--text-base);
+        color: var(--accent-dark);
+        border: 2px solid var(--border-light);
+        border-radius: var(--radius-md);
+        background: var(--primary-light);
+        outline: none;
+        box-sizing: border-box;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
       .input-group__value:focus {
         outline: none;
@@ -111,6 +227,28 @@
         box-shadow: var(--shadow-lg);
         background: var(--accent-light);
       }
+
+      .dropdown-group {
+        margin-bottom: var(--space-xl);
+      }
+      .dropdown-group select {
+        width: 100%;
+        padding: var(--space-md);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border);
+        background: var(--primary-light);
+        font-family: var(--font-body);
+        font-size: var(--text-base);
+        color: var(--text-dark);
+        cursor: pointer;
+        outline: none;
+        transition: border-color var(--transition-fast);
+      }
+      .dropdown-group select:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px var(--success-light);
+      }
+
       .deduction-fields {
         padding: var(--space-xl);
         background: var(--primary-light);
@@ -219,7 +357,7 @@
       }
       .recommendation__text {
         font-family: var(--font-heading);
-        font-size: var(--text-xl);
+        font-size: var(--text-lg);
         font-weight: var(--weight-bold);
         color: var(--success);
       }
@@ -347,7 +485,7 @@
       <div class="container">
         <h1 class="page-header__title">Income Tax Calculator</h1>
         <p style="color: var(--accent); margin-top: var(--space-sm)">
-          FY 2025-26 (AY 2026-27)
+          FY 2024-25 (AY 2025-26) & FY 2025-26 (AY 2026-27)
         </p>
         <nav class="page-header__breadcrumb" aria-label="Breadcrumb">
           <a href="../index.html">Home</a>
@@ -364,25 +502,39 @@
       <div class="container container--narrow">
         <div class="section-header" style="margin-bottom: var(--space-2xl)">
           <p class="section-header__text">
-            Compare your tax liability under the Old and New tax regimes. Find
-            out which one saves you more money.
+            Compare your tax liability under the Old and New tax regimes using
+            our core engine calculator. Answer simple questions to find your
+            savings.
           </p>
         </div>
 
         <div class="calculator" id="income-tax-calculator">
           <div class="calculator__grid">
             <!-- Inputs -->
-            <div>
+            <div id="calculator-inputs">
+              <div class="dropdown-group">
+                <label
+                  class="input-group__label"
+                  style="display: block; margin-bottom: 8px"
+                  >Assessment Year</label
+                >
+                <select id="assessmentYear">
+                  <option value="2025-26">AY 2025-26 (FY 2024-25)</option>
+                  <option value="2024-25">AY 2024-25 (FY 2023-24)</option>
+                </select>
+              </div>
+
               <div class="input-group">
                 <div class="input-group__header">
                   <label class="input-group__label"
-                    >Gross Annual Income (₹)</label
+                    >Gross Salary Income (₹)</label
                   >
                   <input
                     type="number"
+                    id="grossIncomeVal"
                     name="grossIncome"
                     class="input-group__value"
-                    value="1000000"
+                    value="1200000"
                     min="0"
                     max="100000000"
                     step="10000"
@@ -390,9 +542,10 @@
                 </div>
                 <input
                   type="range"
+                  id="grossIncomeRange"
                   name="grossIncome"
                   class="input-group__range"
-                  value="1000000"
+                  value="1200000"
                   min="0"
                   max="5000000"
                   step="50000"
@@ -401,7 +554,7 @@
 
               <div class="deduction-fields">
                 <div class="deduction-fields__title">
-                  Deductions (for Old Regime comparison)
+                  Eligible Deductions (Old Regime)
                 </div>
 
                 <div class="input-group">
@@ -411,6 +564,7 @@
                     >
                     <input
                       type="number"
+                      id="deductions80CVal"
                       name="deductions80C"
                       class="input-group__value"
                       value="150000"
@@ -421,6 +575,7 @@
                   </div>
                   <input
                     type="range"
+                    id="deductions80CRange"
                     name="deductions80C"
                     class="input-group__range"
                     value="150000"
@@ -437,6 +592,7 @@
                     >
                     <input
                       type="number"
+                      id="deductions80DVal"
                       name="deductions80D"
                       class="input-group__value"
                       value="25000"
@@ -447,35 +603,12 @@
                   </div>
                   <input
                     type="range"
+                    id="deductions80DRange"
                     name="deductions80D"
                     class="input-group__range"
                     value="25000"
                     min="0"
                     max="100000"
-                    step="5000"
-                  />
-                </div>
-
-                <div class="input-group">
-                  <div class="input-group__header">
-                    <label class="input-group__label">HRA Exemption (₹)</label>
-                    <input
-                      type="number"
-                      name="hra"
-                      class="input-group__value"
-                      value="0"
-                      min="0"
-                      max="500000"
-                      step="1000"
-                    />
-                  </div>
-                  <input
-                    type="range"
-                    name="hra"
-                    class="input-group__range"
-                    value="0"
-                    min="0"
-                    max="500000"
                     step="5000"
                   />
                 </div>
@@ -489,84 +622,24 @@
               <div class="comparison">
                 <div class="comparison__box comparison__box--old">
                   <div class="comparison__label">Old Regime</div>
-                  <div class="comparison__value" data-result="taxOld">
-                    ₹1,17,000
-                  </div>
+                  <div class="comparison__value" id="taxOldResult">-</div>
                 </div>
                 <div class="comparison__box comparison__box--new">
                   <div class="comparison__label">New Regime</div>
-                  <div class="comparison__value" data-result="taxNew">
-                    ₹52,000
-                  </div>
+                  <div class="comparison__value" id="taxNewResult">-</div>
                 </div>
               </div>
 
               <div class="recommendation">
                 <div class="recommendation__label">Our Recommendation</div>
-                <div class="recommendation__text" data-result="recommendation">
-                  New Tax Regime is better for you!
+                <div class="recommendation__text" id="recommendationResult">
+                  -
                 </div>
               </div>
 
               <div class="savings">
-                <div class="savings__label">Your Savings</div>
-                <div class="savings__value" data-result="savings">₹65,000</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tax Slabs Reference -->
-        <div class="tax-slabs">
-          <h3 class="tax-slabs__title">Tax Slab Rates FY 2025-26</h3>
-          <div class="slabs-grid">
-            <!-- Old Regime -->
-            <div class="slab-table">
-              <div class="slab-table__header">Old Tax Regime</div>
-              <div class="slab-row">
-                <span class="slab-row__income">Up to ₹2.5 Lakh</span>
-                <span class="slab-row__rate">Nil</span>
-              </div>
-              <div class="slab-row">
-                <span class="slab-row__income">₹2.5L - ₹5L</span>
-                <span class="slab-row__rate">5%</span>
-              </div>
-              <div class="slab-row">
-                <span class="slab-row__income">₹5L - ₹10L</span>
-                <span class="slab-row__rate">20%</span>
-              </div>
-              <div class="slab-row">
-                <span class="slab-row__income">Above ₹10L</span>
-                <span class="slab-row__rate">30%</span>
-              </div>
-            </div>
-
-            <!-- New Regime -->
-            <div class="slab-table">
-              <div class="slab-table__header">New Tax Regime (Default)</div>
-              <div class="slab-row">
-                <span class="slab-row__income">Up to ₹3 Lakh</span>
-                <span class="slab-row__rate">Nil</span>
-              </div>
-              <div class="slab-row">
-                <span class="slab-row__income">₹3L - ₹7L</span>
-                <span class="slab-row__rate">5%</span>
-              </div>
-              <div class="slab-row">
-                <span class="slab-row__income">₹7L - ₹10L</span>
-                <span class="slab-row__rate">10%</span>
-              </div>
-              <div class="slab-row">
-                <span class="slab-row__income">₹10L - ₹12L</span>
-                <span class="slab-row__rate">15%</span>
-              </div>
-              <div class="slab-row">
-                <span class="slab-row__income">₹12L - ₹15L</span>
-                <span class="slab-row__rate">20%</span>
-              </div>
-              <div class="slab-row">
-                <span class="slab-row__income">Above ₹15L</span>
-                <span class="slab-row__rate">30%</span>
+                <div class="savings__label" id="savingsLabel">Your Savings</div>
+                <div class="savings__value" id="savingsResult">-</div>
               </div>
             </div>
           </div>
@@ -629,7 +702,91 @@
       </div>
     </footer>
 
+    <!-- Tax Engine Core Loaded Before Main Script -->
+    <script src="../scripts/taxEngineCore.js"></script>
     <script src="../scripts/main.js"></script>
-    <script src="../scripts/calculators.js"></script>
+
+    <!-- Frontend Linkage Script -->
+    <script>
+      /**
+       * Connects HTML inputs to the taxEngineCore logic
+       */
+      document.addEventListener("DOMContentLoaded", () => {
+        // Sync Inputs & Ranges
+        const syncElements = (valId, rangeId) => {
+          const valEl = document.getElementById(valId);
+          const rangeEl = document.getElementById(rangeId);
+
+          valEl.addEventListener("input", (e) => {
+            rangeEl.value = e.target.value;
+            triggerCalculation();
+          });
+
+          rangeEl.addEventListener("input", (e) => {
+            valEl.value = e.target.value;
+            triggerCalculation();
+          });
+        };
+
+        syncElements("grossIncomeVal", "grossIncomeRange");
+        syncElements("deductions80CVal", "deductions80CRange");
+        syncElements("deductions80DVal", "deductions80DRange");
+
+        // Assessment Year dropdown change
+        document
+          .getElementById("assessmentYear")
+          .addEventListener("change", triggerCalculation);
+
+        // Calculate and Update DOM
+        function triggerCalculation() {
+          const assessmentYear =
+            document.getElementById("assessmentYear").value;
+          const grossSalary =
+            parseFloat(document.getElementById("grossIncomeVal").value) || 0;
+          const sec80C =
+            parseFloat(document.getElementById("deductions80CVal").value) || 0;
+          const sec80D =
+            parseFloat(document.getElementById("deductions80DVal").value) || 0;
+
+          // Call our core engine
+          // Note: calculateTax is globally available from taxEngineCore.js
+          try {
+            const results = calculateTax({
+              assessmentYear,
+              grossSalary,
+              deductions: { sec80C, sec80D },
+            });
+
+            // Format Currency Helper
+            const formatCurrency = (amount) =>
+              "₹" + Math.round(amount).toLocaleString("en-IN");
+
+            // Update DOM
+            document.getElementById("taxOldResult").textContent =
+              formatCurrency(results.oldRegimeTax);
+            document.getElementById("taxNewResult").textContent =
+              formatCurrency(results.newRegimeTax);
+            document.getElementById("recommendationResult").textContent =
+              results.recommendation;
+
+            if (results.taxSavings > 0) {
+              document.getElementById("savingsResult").textContent =
+                formatCurrency(results.taxSavings);
+              document.getElementById("savingsLabel").textContent =
+                "Your Savings";
+            } else {
+              document.getElementById("savingsResult").textContent = "₹0";
+              document.getElementById("savingsLabel").textContent =
+                "No Difference";
+            }
+          } catch (e) {
+            console.error("Calculation Error:", e);
+          }
+        }
+
+        // Run an initial calculation on load
+        triggerCalculation();
+      });
+    </script>
   </body>
 </html>
