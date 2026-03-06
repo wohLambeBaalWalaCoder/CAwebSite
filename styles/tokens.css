@@ -1,6 +1,6 @@
 /* ========================================
    L R B & Company - Design Tokens
-   Premium White & Gold Theme
+   Premium White & Green Theme
    ======================================== */
 
 :root {
@@ -8,14 +8,14 @@
 
   /* Primary Colors - Clean White Theme */
   --primary: #ffffff;
-  --primary-light: #fafaf9;
-  --primary-dark: #f5f5f4;
+  --primary-light: #f8faf9;
+  --primary-dark: #f0f5f2;
 
-  /* Accent Colors - Premium Soft Gold (RGB 212, 175, 55) */
-  --accent: #d4af37;
-  --accent-hover: #c09d2e;
-  --accent-light: #fcfaf5;
-  --accent-dark: #a58421;
+  /* Accent Colors - Custom Green (RGB 101, 172, 76) */
+  --accent: #65ac4c;
+  --accent-hover: #5a9944;
+  --accent-light: #e8f5e1;
+  --accent-dark: #4e8a3a;
 
   /* Text Colors */
   --text: #1f2937;
@@ -105,7 +105,7 @@
     0 10px 15px -3px rgba(0, 0, 0, 0.25), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
   --shadow-xl:
     0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.25);
-  --shadow-glow: 0 0 30px rgba(212, 175, 55, 0.2);
+  --shadow-glow: 0 0 30px rgba(5, 150, 105, 0.2);
   --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.08);
 
   /* ===== Transitions ===== */
@@ -148,66 +148,4 @@
   );
 }
 
-/* ===== Dark Mode Theme Options ===== */
-
-html[data-theme="dark"] {
-  /* Primary Colors - Deep Charcoal Theme */
-  --primary: #121820;
-  --primary-light: #161e27;
-  --primary-dark: #0d1218;
-
-  /* Accent Colors - Premium Soft Gold (Remains for Contrast) */
-  --accent: #d4af37;
-  --accent-hover: #e0be50;
-  --accent-light: rgba(212, 175, 55, 0.1);
-  --accent-dark: #b89527;
-
-  /* Text Colors - High Contrast Light */
-  --text: #f9fafb;
-  --text-secondary: #d1d5db;
-  --text-muted: #9ca3af;
-  --text-dark: #ffffff;
-
-  /* Borders & Surfaces */
-  --border: #2a3441;
-  --border-light: #374151;
-  --surface: #1f2937;
-  --overlay: rgba(0, 0, 0, 0.7);
-
-  /* Shadows - Subtle Inner Glows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-md:
-    0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
-  --shadow-lg:
-    0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
-  --shadow-xl:
-    0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 8px 10px -6px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 30px rgba(212, 175, 55, 0.25);
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.3);
-
-  /* Gradients */
-  --gradient-primary: linear-gradient(
-    135deg,
-    var(--primary-light) 0%,
-    var(--primary-dark) 100%
-  );
-  --gradient-glass: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.05) 0%,
-    rgba(255, 255, 255, 0.02) 100%
-  );
-}
-
-/* ===== Theme Transition Smoothing ===== */
-body,
-.navbar,
-.card,
-.hero__bg::after,
-.section,
-.tools-showcase {
-  transition:
-    background-color var(--transition-base),
-    color var(--transition-base),
-    border-color var(--transition-base),
-    box-shadow var(--transition-base);
-}
+/* Future: Light mode overrides could be added here */
