@@ -10,8 +10,8 @@
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
     <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#65AC4C" />
-      <stop offset="100%" stop-color="#4E8A3A" />
+      <stop offset="0%" stop-color="#FFBF00" />
+      <stop offset="100%" stop-color="#CC9900" />
     </linearGradient>
   </defs>
 
@@ -20,7 +20,7 @@
         font-family="system-ui, -apple-system, sans-serif" 
         font-size="110" font-weight="800" 
         fill="url(#textGradient)" 
-        style="letter-spacing: -0.02em; filter: drop-shadow(0 4px 12px rgba(101, 172, 76, 0.15));">
+        style="letter-spacing: -0.02em; filter: drop-shadow(0 4px 12px rgba(255, 191, 0, 0.2));">
     LRB
   </text>
 </svg>
