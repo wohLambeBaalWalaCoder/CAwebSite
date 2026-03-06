@@ -172,6 +172,22 @@
         color: var(--text-muted);
         line-height: var(--leading-relaxed);
       }
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-xl);
+        margin-top: var(--space-3xl);
+      }
+      @media (max-width: 900px) {
+        .team-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 640px) {
+        .team-grid {
+          grid-template-columns: 1fr;
+        }
+      }
 
       /* New Stylish Leadership Card */
       .leadership-card {
@@ -539,6 +555,60 @@
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <!-- Team Grid (Placeholder Members) -->
+          <div class="team-grid">
+            <!-- Team Member 1 -->
+            <div class="team-card">
+              <div class="team-card__avatar">
+                <img
+                  src="https://ui-avatars.com/api/?name=Audit+Lead&background=FFBF00&color=fff&size=120"
+                  alt="Team Member"
+                  style="border-radius: 50%"
+                />
+              </div>
+              <h4 class="team-card__name">Audit Partner</h4>
+              <p class="team-card__role">Statutory & Internal Audit</p>
+              <p class="team-card__bio">
+                Expert in compliance, statutory auditing, and risk management
+                with over 10 years of experience.
+              </p>
+            </div>
+
+            <!-- Team Member 2 -->
+            <div class="team-card">
+              <div class="team-card__avatar">
+                <img
+                  src="https://ui-avatars.com/api/?name=Tax+Director&background=FFBF00&color=fff&size=120"
+                  alt="Team Member"
+                  style="border-radius: 50%"
+                />
+              </div>
+              <h4 class="team-card__name">Tax Director</h4>
+              <p class="team-card__role">Direct & Indirect Taxation</p>
+              <p class="team-card__bio">
+                Specialist in international taxation, GST compliance, and
+                corporate tax structuring.
+              </p>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="team-card">
+              <div class="team-card__avatar">
+                <img
+                  src="https://ui-avatars.com/api/?name=Advisory+Head&background=FFBF00&color=fff&size=120"
+                  alt="Team Member"
+                  style="border-radius: 50%"
+                />
+              </div>
+              <h4 class="team-card__name">Advisory Head</h4>
+              <p class="team-card__role">Business Consultancy</p>
+              <p class="team-card__bio">
+                Leads virtual CFO services, startup registration, and financial
+                modeling for scaling businesses.
+              </p>
             </div>
           </div>
         </div>
