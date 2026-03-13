@@ -85,7 +85,7 @@
         .input-group__value {
           width: 100%;
           text-align: left;
-          margin-top: 8px; /* Extra gap if flex gap isn't fully supported */
+          margin-top: 8px;
           box-sizing: border-box;
         }
         .results {
@@ -101,6 +101,95 @@
           padding: var(--space-md);
         }
       }
+
+      /* ===== Mobile polish at 640px ===== */
+      @media (max-width: 640px) {
+        /* Calculator outer card */
+        .calculator {
+          padding: var(--space-lg) !important;
+          border-radius: var(--radius-xl) !important;
+        }
+
+        /* Stack label + number input vertically */
+        .input-group__header {
+          flex-direction: column !important;
+          align-items: flex-start !important;
+          gap: var(--space-xs) !important;
+        }
+        .input-group__label {
+          font-size: var(--text-sm) !important;
+        }
+        .input-group__value {
+          width: 100% !important;
+          max-width: 100% !important;
+          font-size: var(--text-base) !important;
+          text-align: left !important;
+          box-sizing: border-box !important;
+        }
+        .input-group {
+          margin-bottom: var(--space-lg) !important;
+        }
+
+        /* Deductions section — tighter padding */
+        .deduction-fields {
+          padding: var(--space-md) !important;
+          margin-top: var(--space-lg) !important;
+        }
+        .deduction-fields__title {
+          font-size: var(--text-base) !important;
+          margin-bottom: var(--space-md) !important;
+        }
+
+        /* Assessment year select */
+        .dropdown-group {
+          margin-bottom: var(--space-lg) !important;
+        }
+
+        /* Results panel — remove sticky on mobile (causes scroll traps) */
+        .results {
+          position: static !important;
+          padding: var(--space-lg) !important;
+          border-radius: var(--radius-lg) !important;
+        }
+        .results__title {
+          font-size: var(--text-lg) !important;
+          margin-bottom: var(--space-lg) !important;
+        }
+
+        /* Comparison boxes — side by side but smaller */
+        .comparison {
+          grid-template-columns: 1fr 1fr !important;
+          gap: var(--space-sm) !important;
+          margin-bottom: var(--space-lg) !important;
+        }
+        .comparison__box {
+          padding: var(--space-sm) var(--space-md) !important;
+        }
+        .comparison__label {
+          font-size: 10px !important;
+        }
+        .comparison__value {
+          font-size: var(--text-xl) !important;
+        }
+
+        /* Recommendation */
+        .recommendation {
+          padding: var(--space-md) !important;
+        }
+        .recommendation__text {
+          font-size: var(--text-base) !important;
+        }
+
+        /* Savings */
+        .savings {
+          margin-top: var(--space-lg) !important;
+          padding-top: var(--space-md) !important;
+        }
+        .savings__value {
+          font-size: var(--text-2xl) !important;
+        }
+      }
+
       .input-group {
         margin-bottom: var(--space-2xl);
         position: relative;

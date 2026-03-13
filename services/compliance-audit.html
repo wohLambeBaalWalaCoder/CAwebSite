@@ -516,6 +516,209 @@
           </div>
         </div>
 
+        <!-- Proprietary Technology: GRCplus -->
+        <style>
+          @media (max-width: 992px) {
+            #grc-plus-grid {
+              grid-template-columns: 1fr !important;
+              gap: var(--space-2xl) !important;
+              text-align: center;
+            }
+            #grc-plus-grid ul li {
+              flex-direction: column;
+              align-items: center !important;
+              text-align: center;
+            }
+          }
+          @media (max-width: 640px) {
+            .grc-mock-widgets {
+              display: grid !important;
+              grid-template-columns: 1fr 1fr !important;
+              gap: var(--space-xs) !important;
+              margin-left: 0 !important;
+              margin-right: 0 !important;
+              padding-left: 0 !important;
+              padding-right: 0 !important;
+              overflow: visible !important;
+            }
+            .grc-mock-widgets > div {
+              width: 100% !important;
+              box-sizing: border-box !important;
+              padding: var(--space-sm) var(--space-md) !important;
+              flex: none !important;
+            }
+            .grc-mock-widgets > div > div:first-child {
+              font-size: 9px !important;
+              letter-spacing: 0.5px !important;
+              margin-bottom: 2px;
+            }
+            .grc-mock-widgets > div > div:last-child {
+              margin-top: 0 !important;
+              font-size: 1.6rem !important;
+            }
+            .grc-mock-table-row {
+              flex-wrap: wrap !important;
+              gap: 4px;
+            }
+            .grc-mock-table-row span:first-child {
+              font-size: var(--text-xs) !important;
+              flex: 1;
+            }
+            .grc-mock-container {
+              padding: var(--space-md) !important;
+              border-radius: var(--radius-lg) !important;
+              overflow: hidden !important;
+              box-shadow: 0 8px 24px rgba(0,0,0,0.3) !important;
+            }
+            /* Dashboard header on mobile */
+            .grc-mock-container > div:first-child {
+              padding-bottom: var(--space-sm) !important;
+              margin-bottom: var(--space-sm) !important;
+            }
+            /* Compact the text content column on mobile */
+            #grc-plus-grid > div:first-child h2 {
+              font-size: var(--text-xl) !important;
+              margin-bottom: var(--space-sm) !important;
+            }
+            #grc-plus-grid > div:first-child p {
+              font-size: var(--text-sm) !important;
+              margin-bottom: var(--space-sm) !important;
+            }
+            #grc-plus-grid ul {
+              flex-direction: column !important;
+              overflow: hidden !important;
+              gap: var(--space-xs) !important;
+              margin-bottom: var(--space-sm) !important;
+              padding-bottom: 0 !important;
+              margin-left: 0 !important;
+              margin-right: 0 !important;
+            }
+            #grc-plus-grid ul::-webkit-scrollbar { display: none; }
+            #grc-plus-grid ul li {
+              display: flex !important;
+              flex-direction: row !important;
+              align-items: flex-start !important;
+              gap: var(--space-xs) !important;
+              min-width: unset !important;
+              width: 100% !important;
+              background: rgba(255,255,255,0.03) !important;
+              border: 1px solid rgba(255,255,255,0.06) !important;
+              border-radius: var(--radius-md) !important;
+              padding: var(--space-sm) !important;
+              flex-shrink: unset !important;
+              box-sizing: border-box !important;
+            }
+            #grc-plus-grid ul li span:first-child {
+              flex-shrink: 0;
+              width: 20px;
+              height: 20px;
+              background: var(--accent-light);
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 0.75rem;
+              line-height: 1;
+              margin-top: 2px;
+            }
+            #grc-plus-grid ul li span:last-child {
+              font-size: var(--text-xs) !important;
+              line-height: 1.5;
+            }
+            #grc-plus-grid .smart-alt-box {
+              padding: var(--space-sm) !important;
+            }
+            #grc-plus-grid .smart-alt-box p {
+              font-size: var(--text-xs) !important;
+            }
+            /* Prevent GRCplus section from overflowing parent */
+            #grc-plus-grid {
+              width: 100% !important;
+              box-sizing: border-box !important;
+              overflow: hidden !important;
+            }
+            /* Clamp the text content column so it can't overflow the grid card */
+            #grc-plus-grid > div:first-child {
+              max-width: 100% !important;
+              width: 100% !important;
+              overflow: hidden !important;
+              box-sizing: border-box !important;
+            }
+          }
+        </style>
+        <div class="mb-4xl section" style="padding-top: 0">
+          <div class="grid" id="grc-plus-grid" style="grid-template-columns: 1fr 1fr; gap: var(--space-4xl); align-items: center; background: linear-gradient(135deg, var(--primary-light), var(--background)); border: 1px solid var(--border); border-radius: var(--radius-2xl); padding: var(--space-3xl); box-shadow: var(--shadow-lg);">
+            <div>
+              <span class="section-header__tag" style="margin-bottom: var(--space-sm); display: inline-block;">Proprietary Technology</span>
+              <h2 style="font-size: var(--text-3xl); margin-bottom: var(--space-md); color: var(--text);">GRC<span style="color: var(--accent);">plus</span> Web Application</h2>
+              <p style="color: var(--text-secondary); font-size: var(--text-lg); line-height: var(--leading-relaxed); margin-bottom: var(--space-lg);">
+                Experience governance, risk, and compliance management without the heavy IT burden.
+              </p>
+              
+              <ul style="list-style: none; padding: 0; margin-bottom: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md);">
+                <li style="display: flex; gap: var(--space-sm); align-items: flex-start;">
+                  <span style="color: var(--accent); font-weight: bold; font-size: 1.2rem; line-height: 1;">✓</span>
+                  <span style="color: var(--text-muted); font-size: var(--text-md);"><strong style="color: var(--text-secondary);">Organization Dashboard:</strong> Real-time status updates and actionable insights at a glance.</span>
+                </li>
+                <li style="display: flex; gap: var(--space-sm); align-items: flex-start;">
+                  <span style="color: var(--accent); font-weight: bold; font-size: 1.2rem; line-height: 1;">✓</span>
+                  <span style="color: var(--text-muted); font-size: var(--text-md);"><strong style="color: var(--text-secondary);">Automated RCM Scheduler:</strong> Proactive management of the Risk Control Matrix without manual follow-ups.</span>
+                </li>
+                <li style="display: flex; gap: var(--space-sm); align-items: flex-start;">
+                  <span style="color: var(--accent); font-weight: bold; font-size: 1.2rem; line-height: 1;">✓</span>
+                  <span style="color: var(--text-muted); font-size: var(--text-md);"><strong style="color: var(--text-secondary);">Evidence Submission Prompts:</strong> Automated, proactive reminders to keep compliance and audits on track.</span>
+                </li>
+              </ul>
+              
+              <div class="smart-alt-box" style="background: var(--primary-dark); padding: var(--space-lg); border-radius: var(--radius-lg); border-left: 4px solid var(--accent);">
+                <p style="color: var(--text-muted); font-size: var(--text-sm); line-height: var(--leading-relaxed);">
+                  <strong style="color: var(--text-secondary);">The Smart Alternative:</strong> Compared to enterprise solutions like SAP GRC-PC or ServiceNow, L R B & Company positions GRCplus as a cost-effective, user-friendly, and highly scalable alternative perfectly tailored for small, mid-size, and large enterprises.
+                </p>
+              </div>
+            </div>
+            
+            <!-- Mock UI Graphic -->
+            <div class="grc-mock-container" style="background: var(--primary-dark); border: 1px solid rgba(101, 172, 76, 0.2); border-radius: var(--radius-xl); padding: var(--space-xl); position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
+               <!-- Header -->
+               <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: var(--space-md); margin-bottom: var(--space-lg);">
+                 <div style="display: flex; gap: 8px;">
+                   <div style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56;"></div>
+                   <div style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e;"></div>
+                   <div style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f;"></div>
+                 </div>
+                 <div style="font-family: monospace; font-size: var(--text-xs); color: var(--accent); letter-spacing: 1px;">GRC+ DASHBOARD</div>
+               </div>
+               
+               <!-- Widgets -->
+               <div class="grid grid-2 grc-mock-widgets" style="gap: var(--space-sm); margin-bottom: var(--space-sm);">
+                 <div style="background: rgba(255,255,255,0.03); padding: var(--space-md); border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.05);">
+                   <div style="font-size: var(--text-xs); color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Compliance Score</div>
+                   <div style="font-size: 2.5rem; color: var(--accent); font-weight: bold; margin-top: 4px;">96%</div>
+                 </div>
+                 <div style="background: rgba(255,255,255,0.03); padding: var(--space-md); border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.05);">
+                   <div style="font-size: var(--text-xs); color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Pending Evidence</div>
+                   <div style="font-size: 2.5rem; color: #ffbd2e; font-weight: bold; margin-top: 4px;">4</div>
+                 </div>
+               </div>
+               
+               <!-- Table Mock -->
+               <div style="background: rgba(255,255,255,0.03); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.05);">
+                 <div style="font-size: var(--text-xs); color: var(--text-muted); text-transform: uppercase; margin-bottom: var(--space-sm); letter-spacing: 1px;">Automated RCM Scheduler</div>
+                 <div style="display: flex; flex-direction: column; gap: 12px;">
+                   <div class="grc-mock-table-row" style="display: flex; justify-content: space-between; align-items: center; font-size: var(--text-sm); padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                     <span style="color: var(--text-secondary);">Q3 User Access Review</span> 
+                     <span style="background: rgba(39, 201, 63, 0.1); color: #27c93f; padding: 2px 8px; border-radius: 4px; font-size: var(--text-xs);">Completed</span>
+                   </div>
+                   <div class="grc-mock-table-row" style="display: flex; justify-content: space-between; align-items: center; font-size: var(--text-sm); padding-bottom: 4px;">
+                     <span style="color: var(--text-secondary);">Payroll Substantive Test</span> 
+                     <span style="background: rgba(255, 189, 46, 0.1); color: #ffbd2e; padding: 2px 8px; border-radius: 4px; font-size: var(--text-xs);">Prompt Sent</span>
+                   </div>
+                 </div>
+               </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Why Choose Us -->
         <div
           class="mb-4xl section feature-block"
